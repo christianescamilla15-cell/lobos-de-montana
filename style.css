@@ -1,0 +1,651 @@
+/* ============================================================
+   [INICIO] Branch: Indez-Destacados-Chris | Autor: Chris
+   Descripcion: Estilos para la seccion de Productos Destacados.
+   Incluye variables de color (paleta Pantone del equipo),
+   cards con imagenes linkeadas, botones de carrito y comprar,
+   badges y hover animations. Usa Bootstrap 5 para el grid.
+============================================================ */
+
+:root {
+    /* Paleta Pantone del equipo */
+    --color-fondo: #161F28;              /* Pantone Black 6 CP */
+    --color-card: #1E3765;               /* Pantone 655 CP */
+    --color-acento: #A9C0DE;             /* Pantone 2717 CP */
+    --color-acento-hover: #D3DFE8;       /* Pantone 642 CP */
+    --color-texto: #D3DFE8;              /* Pantone 642 CP */
+    --color-texto-secundario: #A9C0DE;   /* Pantone 2717 CP */
+    --color-badge: #1E3765;              /* Pantone 655 CP */
+    --color-precio: #D3DFE8;             /* Pantone 642 CP */
+    --border-radius: 16px;
+    --sombra-card: 0 8px 32px rgba(22, 31, 40, 0.5);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+/* Offset para anchor links con navbar fixed */
+#productos-destacados,
+#catalogo,
+#nosotros,
+#contacto {
+    scroll-margin-top: 80px;
+}
+
+/* --- Titulo Productos Destacados --- */
+
+.productos-destacados__titulo {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--color-acento), var(--color-acento-hover));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.productos-destacados__slogan {
+    font-size: 1.1rem;
+    color: var(--color-texto-secundario);
+}
+
+/* --- Card de producto --- */
+
+.producto-card {
+    background: var(--color-card);
+    border: none;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(169, 192, 222, 0.2);
+}
+
+.producto-card__imagen {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.producto-card__imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    transition: transform 0.4s ease;
+}
+
+.producto-card:hover .producto-card__imagen img {
+    transform: scale(1.08);
+}
+
+.producto-card__badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--color-acento);
+    color: var(--color-fondo);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    z-index: 2;
+}
+
+.producto-card__nombre {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-texto);
+    margin-bottom: 8px;
+}
+
+.producto-card__descripcion {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-texto-secundario);
+}
+
+.producto-card__precio {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--color-precio);
+}
+
+/* --- Botones: Carrito y Comprar --- */
+
+.btn-carrito {
+    background: transparent;
+    color: var(--color-acento);
+    border: 2px solid var(--color-acento);
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-carrito:hover {
+    background: var(--color-acento);
+    color: var(--color-fondo);
+    transform: scale(1.03);
+}
+
+.btn-comprar {
+    background: var(--color-acento);
+    color: var(--color-fondo);
+    border: 2px solid var(--color-acento);
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-comprar:hover {
+    background: var(--color-acento-hover);
+    border-color: var(--color-acento-hover);
+    color: var(--color-fondo);
+    transform: scale(1.03);
+}
+
+/* --- Responsive Destacados --- */
+@media (max-width: 576px) {
+    .productos-destacados__titulo {
+        font-size: 1.6rem;
+    }
+
+    .producto-card__imagen {
+        height: 180px;
+    }
+}
+
+/* [FIN] Estilos Productos Destacados - Indez-Destacados-Chris */
+
+/* ============================================================
+   [INICIO] Branch: Indez-Catalogo-Chris | Autor: Chris
+   Descripcion: Estilos para la seccion de Catalogo general.
+   Cards compactas con imagenes linkeadas, botones de carrito
+   y comprar, hover animations. Usa Bootstrap 5 para el grid.
+   Se integrara con el catalogo de otro desarrollador del equipo.
+============================================================ */
+
+/* --- Titulo Catalogo --- */
+
+.catalogo__titulo {
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-texto);
+}
+
+.catalogo__subtitulo {
+    font-size: 1rem;
+    color: var(--color-texto-secundario);
+}
+
+/* --- Card de catalogo --- */
+
+.catalogo-card {
+    background: var(--color-card);
+    border: none;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--sombra-card);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.catalogo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(169, 192, 222, 0.15);
+}
+
+.catalogo-card__imagen {
+    height: 180px;
+    overflow: hidden;
+}
+
+.catalogo-card__imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    transition: transform 0.4s ease;
+}
+
+.catalogo-card:hover .catalogo-card__imagen img {
+    transform: scale(1.08);
+}
+
+.catalogo-card__nombre {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-texto);
+    margin-bottom: 6px;
+}
+
+.catalogo-card__precio {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-acento);
+}
+
+/* --- Responsive Catalogo --- */
+@media (max-width: 576px) {
+    .catalogo__titulo {
+        font-size: 1.4rem;
+    }
+
+    .catalogo-card__imagen {
+        height: 140px;
+    }
+}
+
+/* [FIN] Estilos Catalogo - Indez-Catalogo-Chris */
+
+/* ============================================================
+   [INICIO] Branch: Indez-Slogan-Chris | Autor: Chris
+   Descripcion: Estilos para la seccion Hero/Slogan principal.
+   Banner de pantalla completa con imagen de fondo de montana
+   linkeada, overlay oscuro, nombre de marca, slogan y boton CTA.
+============================================================ */
+
+/* --- Seccion Hero / Slogan --- */
+
+.hero-slogan {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 500px;
+    background: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&fit=crop') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-slogan__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(22, 31, 40, 0.4) 0%,
+        rgba(22, 31, 40, 0.9) 100%
+    );
+    z-index: 1;
+}
+
+/* Logo como capa intermedia: fondo < overlay < LOGO < texto */
+.hero-slogan__logo {
+    position: absolute;
+    z-index: 1;
+    width: 420px;
+    max-width: 50vw;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.12;
+    pointer-events: none;
+    user-select: none;
+    filter: brightness(5) saturate(0);
+}
+
+.hero-slogan__content {
+    position: relative;
+    z-index: 2;
+    padding: 0 24px;
+    max-width: 800px;
+}
+
+.hero-slogan__marca {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: var(--color-texto);
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.hero-slogan__texto {
+    font-size: 1.3rem;
+    color: var(--color-texto-secundario);
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.hero-slogan__cta {
+    background: var(--color-acento);
+    color: var(--color-fondo);
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 20px rgba(169, 192, 222, 0.4);
+    transition: all 0.3s ease;
+}
+
+.hero-slogan__cta:hover {
+    background: var(--color-acento-hover);
+    color: var(--color-fondo);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(169, 192, 222, 0.5);
+}
+
+/* --- Responsive Slogan --- */
+@media (max-width: 768px) {
+    .hero-slogan {
+        height: 80vh;
+        min-height: 400px;
+    }
+
+    .hero-slogan__marca {
+        font-size: 2.2rem;
+        letter-spacing: 3px;
+    }
+
+    .hero-slogan__texto {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    .hero-slogan__cta {
+        padding: 14px 32px;
+        font-size: 0.85rem;
+    }
+}
+
+/* [FIN] Estilos Slogan - Indez-Slogan-Chris */
+
+/* ============================================================
+   [INICIO] Branch: Pagina-de-Inicio-Ale | Autor: Ale
+   Descripcion: Estilos para el Navbar y Footer de la pagina de
+   inicio. Navbar fixed con transparencia que se oscurece al hacer
+   scroll, icono de carrito con contador, footer con links, redes
+   sociales y copyright. Usa Bootstrap 5 como base.
+============================================================ */
+
+/* --- Navbar --- */
+
+.navbar-inicio {
+    background: rgba(22, 31, 40, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 14px 0;
+    transition: background 0.3s ease;
+}
+
+.navbar-inicio__marca {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-texto) !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-inicio__logo {
+    height: 36px;
+    width: auto;
+    filter: brightness(5) saturate(0);
+}
+
+.navbar-inicio .nav-link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-texto-secundario) !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.navbar-inicio .nav-link:hover {
+    color: var(--color-acento-hover) !important;
+}
+
+.navbar-inicio__carrito {
+    position: relative;
+    font-size: 1.3rem;
+}
+
+.navbar-inicio__carrito-count {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: var(--color-acento);
+    color: var(--color-fondo);
+    font-size: 0.6rem;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Footer --- */
+
+.footer-inicio {
+    background: #111924;
+    border-top: 1px solid rgba(169, 192, 222, 0.1);
+}
+
+.footer-inicio__titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-texto);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-inicio__logo {
+    height: 28px;
+    width: auto;
+    filter: brightness(5) saturate(0);
+}
+
+.footer-inicio__texto {
+    font-size: 0.85rem;
+    color: var(--color-texto-secundario);
+    line-height: 1.7;
+}
+
+.footer-inicio__links li {
+    margin-bottom: 8px;
+}
+
+.footer-inicio__links a {
+    color: var(--color-texto-secundario);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+}
+
+.footer-inicio__links a:hover {
+    color: var(--color-acento-hover);
+}
+
+.footer-inicio__redes a {
+    color: var(--color-texto-secundario);
+    font-size: 1.4rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-inicio__redes a:hover {
+    color: var(--color-acento-hover);
+    transform: translateY(-3px);
+}
+
+.footer-inicio__linea {
+    border-color: rgba(169, 192, 222, 0.15);
+}
+
+.footer-inicio__copy {
+    font-size: 0.8rem;
+    color: var(--color-texto-secundario);
+}
+
+/* --- Responsive Navbar/Footer --- */
+@media (max-width: 576px) {
+    .navbar-inicio__marca {
+        font-size: 1.1rem;
+    }
+}
+
+/* [FIN] Estilos Pagina de Inicio - Pagina-de-Inicio-Ale */
+
+/* === Seccion Nosotros === */
+
+.seccion-nosotros {
+    background: linear-gradient(180deg, var(--color-fondo) 0%, #111924 100%);
+}
+
+.nosotros__logo-grande {
+    width: 280px;
+    max-width: 80%;
+    height: auto;
+    opacity: 0.15;
+    filter: brightness(5) saturate(0);
+}
+
+.nosotros__titulo {
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-texto);
+    margin-bottom: 20px;
+}
+
+.nosotros__texto {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--color-texto-secundario);
+}
+
+.nosotros__stat {
+    padding: 20px;
+}
+
+.nosotros__stat-icon {
+    font-size: 2rem;
+    color: var(--color-acento);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.nosotros__stat-num {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--color-texto);
+    margin-bottom: 2px;
+}
+
+.nosotros__stat-label {
+    font-size: 0.8rem;
+    color: var(--color-texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* === Seccion Contacto === */
+
+.seccion-contacto {
+    background: #111924;
+}
+
+.contacto__titulo {
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-texto);
+}
+
+.contacto__subtitulo {
+    font-size: 1rem;
+    color: var(--color-texto-secundario);
+}
+
+.contacto-info__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.contacto-info__icon {
+    font-size: 1.4rem;
+    color: var(--color-acento);
+    margin-top: 4px;
+}
+
+.contacto-info__label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-texto);
+    margin-bottom: 2px;
+}
+
+.contacto-info__dato {
+    font-size: 0.85rem;
+    color: var(--color-texto-secundario);
+    margin-bottom: 0;
+}
+
+.contacto-form__input {
+    background: var(--color-card);
+    border: 1px solid rgba(169, 192, 222, 0.15);
+    color: var(--color-texto);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    transition: border-color 0.3s ease;
+}
+
+.contacto-form__input::placeholder {
+    color: rgba(169, 192, 222, 0.4);
+}
+
+.contacto-form__input:focus {
+    background: var(--color-card);
+    border-color: var(--color-acento);
+    color: var(--color-texto);
+    box-shadow: 0 0 0 3px rgba(169, 192, 222, 0.1);
+}
+
+/* --- Responsive Nosotros/Contacto --- */
+@media (max-width: 576px) {
+    .nosotros__titulo,
+    .contacto__titulo {
+        font-size: 1.5rem;
+    }
+
+    .nosotros__logo-grande {
+        width: 180px;
+    }
+}
