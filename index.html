@@ -40,19 +40,19 @@
             <div class="collapse navbar-collapse" id="navbarInicio">
                 <ul class="navbar-nav ms-auto align-items-center gap-lg-3">
                     <li class="nav-item">
-                        <a class="nav-link" href="#slogan">Inicio</a>
+                        <a class="nav-link" href="#slogan" data-i18n="nav.inicio">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#productos-destacados">Destacados</a>
+                        <a class="nav-link" href="#productos-destacados" data-i18n="nav.destacados">Destacados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#catalogo">Catálogo</a>
+                        <a class="nav-link" href="#catalogo" data-i18n="nav.catalogo">Catálogo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#nosotros">Nosotros</a>
+                        <a class="nav-link" href="#nosotros" data-i18n="nav.nosotros">Nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contacto">Contacto</a>
+                        <a class="nav-link" href="#contacto" data-i18n="nav.contacto">Contacto</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link navbar-inicio__carrito" href="#">
@@ -77,9 +77,9 @@
         <div class="hero-slogan__overlay"></div>
         <img src="logo-wolf.png" alt="" class="hero-slogan__logo" aria-hidden="true">
         <div class="hero-slogan__content text-center">
-            <h1 class="hero-slogan__marca">Lobos de Montaña</h1>
-            <p class="hero-slogan__texto">Conquista cada sendero — equipo que resiste como tú</p>
-            <a href="#productos-destacados" class="btn btn-lg hero-slogan__cta">Explorar productos</a>
+            <h1 class="hero-slogan__marca" data-i18n="hero.title">Lobos de Montaña</h1>
+            <p class="hero-slogan__texto" data-i18n="hero.text">Conquista cada sendero — equipo que resiste como tú</p>
+            <a href="#productos-destacados" class="btn btn-lg hero-slogan__cta" data-i18n="hero.cta">Explorar productos</a>
         </div>
     </section>
     <!-- [FIN] Seccion Slogan - Indez-Slogan-Chris -->
@@ -97,8 +97,8 @@
     <section id="productos-destacados" class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="productos-destacados__titulo">Productos Destacados</h2>
-                <p class="productos-destacados__slogan">Lo esencial para tu próxima aventura</p>
+                <h2 class="productos-destacados__titulo" data-i18n="featured.title">Productos Destacados</h2>
+                <p class="productos-destacados__slogan" data-i18n="featured.subtitle">Lo esencial para tu próxima aventura</p>
             </div>
 
             <div class="row g-4">
@@ -108,15 +108,15 @@
                     <article class="card producto-card h-100" data-id="botas-cana-media" data-nombre="Botas de Caña Media" data-precio="1299" data-img="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&fit=crop">
                         <div class="producto-card__imagen">
                             <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&fit=crop" class="card-img-top" alt="Botas de Caña Media">
-                            <span class="producto-card__badge">Nuevo</span>
+                            <span class="producto-card__badge" data-i18n="badge.nuevo">Nuevo</span>
                         </div>
                         <div class="card-body d-flex flex-column">
-                            <h3 class="producto-card__nombre">Botas de Caña Media</h3>
-                            <p class="producto-card__descripcion">Soporte y tracción para terrenos irregulares. Diseñadas para caminatas de media y larga distancia.</p>
+                            <h3 class="producto-card__nombre" data-i18n="product.botas">Botas de Caña Media</h3>
+                            <p class="producto-card__descripcion" data-i18n="desc.botas">Soporte y tracción para terrenos irregulares. Diseñadas para caminatas de media y larga distancia.</p>
                             <div class="producto-card__precio mb-3">$1,299 MXN</div>
                             <div class="mt-auto d-flex gap-2">
-                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> Agregar al carrito</button>
-                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> Comprar</button>
+                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> <span data-i18n="btn.addcart">Agregar al carrito</span></button>
+                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> <span data-i18n="btn.buy">Comprar</span></button>
                             </div>
                         </div>
                     </article>
@@ -127,15 +127,15 @@
                     <article class="card producto-card h-100" data-id="sudadera-impermeable" data-nombre="Sudadera Impermeable" data-precio="899" data-img="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&fit=crop">
                         <div class="producto-card__imagen">
                             <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&fit=crop" class="card-img-top" alt="Sudadera Impermeable">
-                            <span class="producto-card__badge">Popular</span>
+                            <span class="producto-card__badge" data-i18n="badge.popular">Popular</span>
                         </div>
                         <div class="card-body d-flex flex-column">
-                            <h3 class="producto-card__nombre">Sudadera Impermeable</h3>
-                            <p class="producto-card__descripcion">Protección contra lluvia y viento sin sacrificar transpirabilidad. Ideal para senderismo en cualquier clima.</p>
+                            <h3 class="producto-card__nombre" data-i18n="product.sudadera">Sudadera Impermeable</h3>
+                            <p class="producto-card__descripcion" data-i18n="desc.sudadera">Protección contra lluvia y viento sin sacrificar transpirabilidad. Ideal para senderismo en cualquier clima.</p>
                             <div class="producto-card__precio mb-3">$899 MXN</div>
                             <div class="mt-auto d-flex gap-2">
-                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> Agregar al carrito</button>
-                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> Comprar</button>
+                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> <span data-i18n="btn.addcart">Agregar al carrito</span></button>
+                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> <span data-i18n="btn.buy">Comprar</span></button>
                             </div>
                         </div>
                     </article>
@@ -146,15 +146,15 @@
                     <article class="card producto-card h-100" data-id="bastones-senderismo" data-nombre="Bastones de Senderismo" data-precio="649" data-img="https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&fit=crop">
                         <div class="producto-card__imagen">
                             <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&fit=crop" class="card-img-top" alt="Bastones de Senderismo">
-                            <span class="producto-card__badge">Esencial</span>
+                            <span class="producto-card__badge" data-i18n="badge.esencial">Esencial</span>
                         </div>
                         <div class="card-body d-flex flex-column">
-                            <h3 class="producto-card__nombre">Bastones de Senderismo</h3>
-                            <p class="producto-card__descripcion">Ultraligeros y ajustables. Reducen el impacto en rodillas y mejoran tu estabilidad en cualquier terreno.</p>
+                            <h3 class="producto-card__nombre" data-i18n="product.bastones">Bastones de Senderismo</h3>
+                            <p class="producto-card__descripcion" data-i18n="desc.bastones">Ultraligeros y ajustables. Reducen el impacto en rodillas y mejoran tu estabilidad en cualquier terreno.</p>
                             <div class="producto-card__precio mb-3">$649 MXN</div>
                             <div class="mt-auto d-flex gap-2">
-                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> Agregar al carrito</button>
-                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> Comprar</button>
+                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> <span data-i18n="btn.addcart">Agregar al carrito</span></button>
+                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> <span data-i18n="btn.buy">Comprar</span></button>
                             </div>
                         </div>
                     </article>
@@ -182,8 +182,8 @@
     <section id="catalogo" class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="catalogo__titulo">Catálogo</h2>
-                <p class="catalogo__subtitulo">Explora nuestro equipo para cada aventura</p>
+                <h2 class="catalogo__titulo" data-i18n="catalog.title">Catálogo</h2>
+                <p class="catalogo__subtitulo" data-i18n="catalog.subtitle">Explora nuestro equipo para cada aventura</p>
             </div>
 
             <div class="row g-4">
@@ -195,11 +195,11 @@
                             <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&fit=crop" class="card-img-top" alt="Mochila de Hidratación 15L">
                         </div>
                         <div class="card-body d-flex flex-column text-center">
-                            <h3 class="catalogo-card__nombre">Mochila de Hidratación 15L</h3>
+                            <h3 class="catalogo-card__nombre" data-i18n="product.mochila">Mochila de Hidratación 15L</h3>
                             <p class="catalogo-card__precio">$1,499 MXN</p>
                             <div class="mt-auto d-flex gap-2">
-                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> Agregar</button>
-                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> Comprar</button>
+                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> <span data-i18n="btn.add">Agregar</span></button>
+                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> <span data-i18n="btn.buy">Comprar</span></button>
                             </div>
                         </div>
                     </article>
@@ -212,11 +212,11 @@
                             <img src="https://images.unsplash.com/photo-1521369909029-2afed882baee?w=400&fit=crop" class="card-img-top" alt="Gorra Protección UV">
                         </div>
                         <div class="card-body d-flex flex-column text-center">
-                            <h3 class="catalogo-card__nombre">Gorra Protección UV</h3>
+                            <h3 class="catalogo-card__nombre" data-i18n="product.gorra">Gorra Protección UV</h3>
                             <p class="catalogo-card__precio">$349 MXN</p>
                             <div class="mt-auto d-flex gap-2">
-                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> Agregar</button>
-                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> Comprar</button>
+                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> <span data-i18n="btn.add">Agregar</span></button>
+                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> <span data-i18n="btn.buy">Comprar</span></button>
                             </div>
                         </div>
                     </article>
@@ -229,11 +229,11 @@
                             <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&fit=crop" class="card-img-top" alt="Pantalón Convertible Trekking">
                         </div>
                         <div class="card-body d-flex flex-column text-center">
-                            <h3 class="catalogo-card__nombre">Pantalón Convertible Trekking</h3>
+                            <h3 class="catalogo-card__nombre" data-i18n="product.pantalon">Pantalón Convertible Trekking</h3>
                             <p class="catalogo-card__precio">$749 MXN</p>
                             <div class="mt-auto d-flex gap-2">
-                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> Agregar</button>
-                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> Comprar</button>
+                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> <span data-i18n="btn.add">Agregar</span></button>
+                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> <span data-i18n="btn.buy">Comprar</span></button>
                             </div>
                         </div>
                     </article>
@@ -246,11 +246,11 @@
                             <img src="https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=400&fit=crop" class="card-img-top" alt="Guantes Térmicos Táctiles">
                         </div>
                         <div class="card-body d-flex flex-column text-center">
-                            <h3 class="catalogo-card__nombre">Guantes Térmicos Táctiles</h3>
+                            <h3 class="catalogo-card__nombre" data-i18n="product.guantes">Guantes Térmicos Táctiles</h3>
                             <p class="catalogo-card__precio">$499 MXN</p>
                             <div class="mt-auto d-flex gap-2">
-                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> Agregar</button>
-                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> Comprar</button>
+                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> <span data-i18n="btn.add">Agregar</span></button>
+                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> <span data-i18n="btn.buy">Comprar</span></button>
                             </div>
                         </div>
                     </article>
@@ -263,11 +263,11 @@
                             <img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&fit=crop" class="card-img-top" alt="Cantimplora Térmica 750ml">
                         </div>
                         <div class="card-body d-flex flex-column text-center">
-                            <h3 class="catalogo-card__nombre">Cantimplora Térmica 750ml</h3>
+                            <h3 class="catalogo-card__nombre" data-i18n="product.cantimplora">Cantimplora Térmica 750ml</h3>
                             <p class="catalogo-card__precio">$399 MXN</p>
                             <div class="mt-auto d-flex gap-2">
-                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> Agregar</button>
-                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> Comprar</button>
+                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> <span data-i18n="btn.add">Agregar</span></button>
+                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> <span data-i18n="btn.buy">Comprar</span></button>
                             </div>
                         </div>
                     </article>
@@ -280,11 +280,11 @@
                             <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&fit=crop" class="card-img-top" alt="Gafas Deportivas Polarizadas">
                         </div>
                         <div class="card-body d-flex flex-column text-center">
-                            <h3 class="catalogo-card__nombre">Gafas Deportivas Polarizadas</h3>
+                            <h3 class="catalogo-card__nombre" data-i18n="product.gafas">Gafas Deportivas Polarizadas</h3>
                             <p class="catalogo-card__precio">$599 MXN</p>
                             <div class="mt-auto d-flex gap-2">
-                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> Agregar</button>
-                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> Comprar</button>
+                                <button class="btn btn-carrito flex-fill"><i class="bi bi-cart-plus"></i> <span data-i18n="btn.add">Agregar</span></button>
+                                <button class="btn btn-comprar flex-fill"><i class="bi bi-bag-check"></i> <span data-i18n="btn.buy">Comprar</span></button>
                             </div>
                         </div>
                     </article>
@@ -303,29 +303,29 @@
                     <img src="logo-wolf.png" alt="Lobos de Montaña" class="nosotros__logo-grande">
                 </div>
                 <div class="col-lg-7">
-                    <h2 class="nosotros__titulo">Sobre Nosotros</h2>
-                    <p class="nosotros__texto">Somos <strong>Lobos de Montaña</strong>, una tienda especializada en equipo de senderismo y montañismo. Nacimos de la pasión por explorar los senderos más desafiantes y la necesidad de contar con equipo confiable que resista cada aventura.</p>
-                    <p class="nosotros__texto">Nuestro compromiso es ofrecer productos de alta calidad, seleccionados por expertos en deportes de montaña, para que cada paso que des sea seguro y cómodo.</p>
+                    <h2 class="nosotros__titulo" data-i18n="about.title">Sobre Nosotros</h2>
+                    <p class="nosotros__texto" data-i18n="about.text1">Somos <strong>Lobos de Montaña</strong>, una tienda especializada en equipo de senderismo y montañismo. Nacimos de la pasión por explorar los senderos más desafiantes y la necesidad de contar con equipo confiable que resista cada aventura.</p>
+                    <p class="nosotros__texto" data-i18n="about.text2">Nuestro compromiso es ofrecer productos de alta calidad, seleccionados por expertos en deportes de montaña, para que cada paso que des sea seguro y cómodo.</p>
                     <div class="row g-4 mt-3">
                         <div class="col-sm-4 text-center">
                             <div class="nosotros__stat">
                                 <i class="bi bi-box-seam nosotros__stat-icon"></i>
                                 <h3 class="nosotros__stat-num">500+</h3>
-                                <p class="nosotros__stat-label">Productos</p>
+                                <p class="nosotros__stat-label" data-i18n="about.stat.products">Productos</p>
                             </div>
                         </div>
                         <div class="col-sm-4 text-center">
                             <div class="nosotros__stat">
                                 <i class="bi bi-people nosotros__stat-icon"></i>
                                 <h3 class="nosotros__stat-num">10K+</h3>
-                                <p class="nosotros__stat-label">Clientes</p>
+                                <p class="nosotros__stat-label" data-i18n="about.stat.clients">Clientes</p>
                             </div>
                         </div>
                         <div class="col-sm-4 text-center">
                             <div class="nosotros__stat">
                                 <i class="bi bi-geo-alt nosotros__stat-icon"></i>
                                 <h3 class="nosotros__stat-num">32</h3>
-                                <p class="nosotros__stat-label">Estados</p>
+                                <p class="nosotros__stat-label" data-i18n="about.stat.states">Estados</p>
                             </div>
                         </div>
                     </div>
@@ -338,8 +338,8 @@
     <section id="contacto" class="py-5 seccion-contacto">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="contacto__titulo">Contáctanos</h2>
-                <p class="contacto__subtitulo">¿Tienes dudas? Escríbenos y te ayudamos a elegir tu equipo ideal</p>
+                <h2 class="contacto__titulo" data-i18n="contact.title">Contáctanos</h2>
+                <p class="contacto__subtitulo" data-i18n="contact.subtitle">¿Tienes dudas? Escríbenos y te ayudamos a elegir tu equipo ideal</p>
             </div>
             <div class="row g-4">
                 <div class="col-lg-4">
@@ -347,29 +347,29 @@
                         <div class="contacto-info__item mb-4">
                             <i class="bi bi-geo-alt-fill contacto-info__icon"></i>
                             <div>
-                                <h5 class="contacto-info__label">Ubicación</h5>
+                                <h5 class="contacto-info__label" data-i18n="contact.location">Ubicación</h5>
                                 <p class="contacto-info__dato">Av. Montaña #1250, CDMX</p>
                             </div>
                         </div>
                         <div class="contacto-info__item mb-4">
                             <i class="bi bi-telephone-fill contacto-info__icon"></i>
                             <div>
-                                <h5 class="contacto-info__label">Teléfono</h5>
+                                <h5 class="contacto-info__label" data-i18n="contact.phone">Teléfono</h5>
                                 <p class="contacto-info__dato">+52 55 1234 5678</p>
                             </div>
                         </div>
                         <div class="contacto-info__item mb-4">
                             <i class="bi bi-envelope-fill contacto-info__icon"></i>
                             <div>
-                                <h5 class="contacto-info__label">Correo</h5>
+                                <h5 class="contacto-info__label" data-i18n="contact.email">Correo</h5>
                                 <p class="contacto-info__dato">contacto@lobosdemontana.mx</p>
                             </div>
                         </div>
                         <div class="contacto-info__item">
                             <i class="bi bi-clock-fill contacto-info__icon"></i>
                             <div>
-                                <h5 class="contacto-info__label">Horario</h5>
-                                <p class="contacto-info__dato">Lun - Sáb: 9:00 - 20:00</p>
+                                <h5 class="contacto-info__label" data-i18n="contact.hours">Horario</h5>
+                                <p class="contacto-info__dato" data-i18n="contact.hours.value">Lun - Sáb: 9:00 - 20:00</p>
                             </div>
                         </div>
                     </div>
@@ -378,23 +378,23 @@
                     <form class="contacto-form">
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label for="contacto-nombre" class="form-label">Nombre completo *</label>
-                                <input type="text" class="form-control contacto-form__input" id="contacto-nombre" placeholder="Tu nombre" required>
+                                <label for="contacto-nombre" class="form-label" data-i18n="contact.form.name">Nombre completo *</label>
+                                <input type="text" class="form-control contacto-form__input" id="contacto-nombre" placeholder="Tu nombre" data-i18n-placeholder="contact.form.name.placeholder" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="contacto-email" class="form-label">Correo electrónico *</label>
+                                <label for="contacto-email" class="form-label" data-i18n="contact.form.email">Correo electrónico *</label>
                                 <input type="email" class="form-control contacto-form__input" id="contacto-email" placeholder="correo@ejemplo.com" required>
                             </div>
                             <div class="col-12">
-                                <label for="contacto-asunto" class="form-label">Asunto *</label>
-                                <input type="text" class="form-control contacto-form__input" id="contacto-asunto" placeholder="¿En qué podemos ayudarte?" required>
+                                <label for="contacto-asunto" class="form-label" data-i18n="contact.form.subject">Asunto *</label>
+                                <input type="text" class="form-control contacto-form__input" id="contacto-asunto" placeholder="¿En qué podemos ayudarte?" data-i18n-placeholder="contact.form.subject.placeholder" required>
                             </div>
                             <div class="col-12">
-                                <label for="contacto-mensaje" class="form-label">Mensaje *</label>
-                                <textarea class="form-control contacto-form__input" id="contacto-mensaje" rows="5" placeholder="Escribe tu mensaje..." required></textarea>
+                                <label for="contacto-mensaje" class="form-label" data-i18n="contact.form.message">Mensaje *</label>
+                                <textarea class="form-control contacto-form__input" id="contacto-mensaje" rows="5" placeholder="Escribe tu mensaje..." data-i18n-placeholder="contact.form.message.placeholder" required></textarea>
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn btn-comprar px-5 py-2"><i class="bi bi-send"></i> Enviar mensaje</button>
+                                <button type="submit" class="btn btn-comprar px-5 py-2"><i class="bi bi-send"></i> <span data-i18n="contact.form.submit">Enviar mensaje</span></button>
                             </div>
                         </div>
                     </form>
@@ -415,20 +415,20 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6">
                     <h5 class="footer-inicio__titulo"><img src="logo-wolf.png" alt="Logo" class="footer-inicio__logo"> Lobos de Montaña</h5>
-                    <p class="footer-inicio__texto">Equipo de montaña y senderismo para los más aventureros. Calidad, resistencia y estilo en cada producto.</p>
+                    <p class="footer-inicio__texto" data-i18n="footer.desc">Equipo de montaña y senderismo para los más aventureros. Calidad, resistencia y estilo en cada producto.</p>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <h5 class="footer-inicio__titulo">Navegación</h5>
+                    <h5 class="footer-inicio__titulo" data-i18n="footer.nav">Navegación</h5>
                     <ul class="list-unstyled footer-inicio__links">
                         <li><a href="#slogan">Inicio</a></li>
-                        <li><a href="#productos-destacados">Productos Destacados</a></li>
+                        <li><a href="#productos-destacados" data-i18n="footer.featured">Productos Destacados</a></li>
                         <li><a href="#catalogo">Catálogo</a></li>
                         <li><a href="#nosotros">Nosotros</a></li>
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <h5 class="footer-inicio__titulo">Síguenos</h5>
+                    <h5 class="footer-inicio__titulo" data-i18n="footer.follow">Síguenos</h5>
                     <div class="footer-inicio__redes d-flex gap-3">
                         <a href="#" aria-label="Facebook"><i class="bi bi-facebook" aria-hidden="true"></i></a>
                         <a href="#" aria-label="Instagram"><i class="bi bi-instagram" aria-hidden="true"></i></a>
@@ -438,7 +438,7 @@
                 </div>
             </div>
             <hr class="footer-inicio__linea mt-4 mb-3">
-            <p class="text-center footer-inicio__copy mb-0">&copy; 2026 Lobos de Montaña. Todos los derechos reservados.</p>
+            <p class="text-center footer-inicio__copy mb-0" data-i18n="footer.copy">&copy; 2026 Lobos de Montaña. Todos los derechos reservados.</p>
         </div>
     </footer>
     <!-- [FIN] Footer - Pagina-de-Inicio-Ale -->
@@ -452,7 +452,7 @@
     <div class="carrito-overlay" id="carritoOverlay"></div>
     <aside class="carrito-panel" id="carritoPanel">
         <div class="carrito-panel__header">
-            <h4 class="carrito-panel__titulo"><i class="bi bi-cart3"></i> Mi Carrito</h4>
+            <h4 class="carrito-panel__titulo"><i class="bi bi-cart3"></i> <span data-i18n="cart.title">Mi Carrito</span></h4>
             <button class="carrito-panel__cerrar" id="carritoCerrar" aria-label="Cerrar carrito">
                 <i class="bi bi-x-lg"></i>
             </button>
@@ -467,10 +467,10 @@
             </div>
             <div class="d-grid gap-2">
                 <button class="btn btn-comprar py-2" id="carritoFinalizar">
-                    <i class="bi bi-bag-check"></i> Finalizar compra
+                    <i class="bi bi-bag-check"></i> <span data-i18n="cart.checkout">Finalizar compra</span>
                 </button>
                 <button class="btn btn-carrito py-2" id="carritoVaciar">
-                    <i class="bi bi-trash3"></i> Vaciar carrito
+                    <i class="bi bi-trash3"></i> <span data-i18n="cart.empty">Vaciar carrito</span>
                 </button>
             </div>
         </div>
@@ -478,6 +478,7 @@
     <!-- [FIN] Panel Carrito - Indez-Destacados-Chris -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="i18n.js"></script>
     <script src="cart.js"></script>
     <script src="animations.js"></script>
     <script src="chatbot.js"></script>

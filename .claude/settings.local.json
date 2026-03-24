@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 create_pptx.py)",
+      "Bash(py create_pptx.py)",
+      "Bash(py /c/Users/Chris/Documents/GitHub/wolves/create_pptx.py)",
+      "Bash(py /c/Users/Chris/Documents/GitHub/wolves/convert_pdf.py)",
+      "Bash(py /c/Users/Chris/Documents/GitHub/wolves/create_pdf.py)"
+    ]
+  }
+}

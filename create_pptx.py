@@ -172,6 +172,23 @@ def add_logo_small(slide):
     """Add small logo in bottom-right corner."""
     add_logo(slide, 12.1, 6.2, 0.7, 0.7)
 
+def add_logo_watermark(slide):
+    """Add centered logo as watermark on every slide."""
+    if not os.path.exists(LOGO_PATH):
+        return None
+    pic = slide.shapes.add_picture(LOGO_PATH, Inches(4.2), Inches(1.5),
+                                   Inches(5.0), Inches(5.0))
+    # Set transparency via XML
+    from lxml import etree
+    blipFill = pic._element.find(qn('p:blipFill'))
+    if blipFill is None:
+        return pic
+    blip = blipFill.find(qn('a:blip'))
+    if blip is not None:
+        alphaModFix = etree.SubElement(blip, qn('a:alphaModFix'))
+        alphaModFix.set('amt', '8000')  # 8% opacity
+    return pic
+
 def add_section_header(slide, text):
     """Adds a styled section header with accent line."""
     add_rect(slide, 0.5, 0.3, 0.06, 0.5, BLUE2717)
@@ -188,6 +205,7 @@ def add_card_border_top(slide, left, top, width, color):
 # ============================================================
 s1 = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(s1, BLACK6)
+add_logo_watermark(s1)
 
 # Gradient overlays for depth
 add_rect(s1, 0, 0, 13.333, 3.5, BLUE655, alpha=12)
@@ -209,7 +227,7 @@ add_line_shape(s1, 3.5, 3.0, 6.3, BLUE2717)
 add_rect(s1, 5.5, 3.08, 2.3, 0.03, ACCENT_GOLD)
 
 # Title
-add_text(s1, 0.5, 3.3, 12.3, 1.5, "LOBOS DE MONTANA", size=68, color=WHITE,
+add_text(s1, 0.5, 3.3, 12.3, 1.5, "LOBOS DE MONTANA", size=80, color=WHITE,
          bold=True, align=PP_ALIGN.CENTER, font_name="Calibri Light")
 
 # Bottom accent line
@@ -219,12 +237,12 @@ add_rect(s1, 5.5, 4.98, 2.3, 0.03, ACCENT_GOLD)
 # Tagline
 add_text(s1, 1.5, 5.2, 10.3, 0.8,
          "Conquista cada sendero \u2014 equipo que resiste como tu",
-         size=24, color=BLUE2717, align=PP_ALIGN.CENTER, italic=True)
+         size=28, color=BLUE2717, align=PP_ALIGN.CENTER, italic=True)
 
 # Subtitle
 add_text(s1, 1.5, 6.0, 10.3, 0.6,
          "Equipo Premium de Senderismo y Montanismo",
-         size=15, color=GRAY642, align=PP_ALIGN.CENTER)
+         size=18, color=GRAY642, align=PP_ALIGN.CENTER)
 
 footer_bar(s1)
 
@@ -234,6 +252,7 @@ footer_bar(s1)
 # ============================================================
 s2 = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(s2, BLACK6)
+add_logo_watermark(s2)
 add_gradient_overlay(s2)
 side_bar(s2)
 
@@ -242,7 +261,7 @@ add_section_header(s2, "NUESTRO SLOGAN")
 # Main quote
 add_text(s2, 0.8, 1.1, 8, 1.8,
          "\"Conquista cada sendero \u2014\nequipo que resiste como tu\"",
-         size=38, color=WHITE, bold=True, font_name="Calibri Light", italic=True)
+         size=44, color=WHITE, bold=True, font_name="Calibri Light", italic=True)
 
 add_line_shape(s2, 0.8, 3.1, 4, BLUE2717)
 add_rect(s2, 0.8, 3.18, 1.5, 0.03, ACCENT_GOLD)
@@ -269,8 +288,8 @@ for title, desc, icon in items:
     add_text(s2, 0.85, y + 0.05, 0.55, 0.55, icon, size=20, color=BLUE2717,
              align=PP_ALIGN.CENTER)
     # Text
-    add_text(s2, 1.6, y - 0.05, 10.5, 0.35, title, size=14, color=BLUE2717, bold=True)
-    add_text(s2, 1.6, y + 0.32, 10.5, 0.55, desc, size=11, color=GRAY642)
+    add_text(s2, 1.6, y - 0.05, 10.5, 0.35, title, size=16, color=BLUE2717, bold=True)
+    add_text(s2, 1.6, y + 0.32, 10.5, 0.55, desc, size=13, color=GRAY642)
     y += 1.15
 
 # Decorative dots
@@ -285,6 +304,7 @@ add_logo_small(s2)
 # ============================================================
 s3 = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(s3, BLACK6)
+add_logo_watermark(s3)
 add_gradient_overlay(s3)
 side_bar(s3)
 
@@ -292,7 +312,7 @@ add_section_header(s3, "QUIENES SOMOS")
 
 add_text(s3, 0.8, 1.0, 11.5, 1.0,
          "Somos Lobos de Montana, una tienda especializada en equipo de senderismo y montanismo. Nacimos de la pasion por explorar los senderos mas desafiantes y la necesidad de contar con equipo confiable que resista cada aventura.",
-         size=15, color=GRAY642)
+         size=17, color=GRAY642)
 
 add_line_shape(s3, 0.8, 2.2, 6, BLUE2717)
 
@@ -301,20 +321,20 @@ add_rounded_rect(s3, 0.6, 2.5, 5.8, 2.0, BLUE655, alpha=70)
 add_card_border_top(s3, 0.6, 2.5, 5.8, BLUE2717)
 add_circle(s3, 1.0, 2.7, 0.5, BLUE2717, alpha=30)
 add_text(s3, 1.05, 2.72, 0.5, 0.5, "\u2605", size=18, color=BLUE2717, align=PP_ALIGN.CENTER)
-add_text(s3, 1.7, 2.7, 4.5, 0.4, "MISION", size=16, color=BLUE2717, bold=True)
+add_text(s3, 1.7, 2.7, 4.5, 0.4, "MISION", size=18, color=BLUE2717, bold=True)
 add_text(s3, 1.0, 3.3, 5.0, 1.0,
          "Equipar a cada aventurero con productos de alta calidad que garanticen seguridad, comodidad y rendimiento en cualquier terreno.",
-         size=12, color=GRAY642)
+         size=14, color=GRAY642)
 
 # Vision card
 add_rounded_rect(s3, 6.9, 2.5, 5.8, 2.0, BLUE655, alpha=70)
 add_card_border_top(s3, 6.9, 2.5, 5.8, BLUE2717)
 add_circle(s3, 7.3, 2.7, 0.5, BLUE2717, alpha=30)
 add_text(s3, 7.35, 2.72, 0.5, 0.5, "\u25B2", size=18, color=BLUE2717, align=PP_ALIGN.CENTER)
-add_text(s3, 8.0, 2.7, 4.5, 0.4, "VISION", size=16, color=BLUE2717, bold=True)
+add_text(s3, 8.0, 2.7, 4.5, 0.4, "VISION", size=18, color=BLUE2717, bold=True)
 add_text(s3, 7.3, 3.3, 5.0, 1.0,
          "Ser la tienda lider en Mexico de equipo outdoor, reconocida por nuestra calidad, innovacion y compromiso con la comunidad aventurera.",
-         size=12, color=GRAY642)
+         size=14, color=GRAY642)
 
 # Values section
 add_text(s3, 0.8, 4.8, 5, 0.5, "NUESTROS VALORES", size=15, color=BLUE2717, bold=True)
@@ -349,6 +369,7 @@ add_logo_small(s3)
 # ============================================================
 s4 = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(s4, BLACK6)
+add_logo_watermark(s4)
 add_gradient_overlay(s4)
 side_bar(s4)
 
@@ -379,11 +400,11 @@ for name, price, desc, border_color in dest:
     add_text(s4, xd + 2.3, 2.35, 1.4, 0.35, price, size=11, color=WHITE,
              bold=True, align=PP_ALIGN.CENTER)
     # Product name
-    add_text(s4, xd + 0.3, 2.4, 2.2, 0.4, name, size=16, color=WHITE, bold=True)
+    add_text(s4, xd + 0.3, 2.4, 2.2, 0.4, name, size=18, color=WHITE, bold=True)
     # Separator
     add_line_shape(s4, xd + 0.3, 3.0, 3.3, border_color, 0.02)
     # Description
-    add_text(s4, xd + 0.3, 3.15, 3.3, 0.5, desc, size=11, color=GRAY642)
+    add_text(s4, xd + 0.3, 3.15, 3.3, 0.5, desc, size=13, color=GRAY642)
     # Decorative corner element
     add_circle(s4, xd + 3.3, 3.4, 0.3, border_color, alpha=15)
     xd += 4.15
@@ -420,6 +441,7 @@ add_logo_small(s4)
 # ============================================================
 s5 = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(s5, BLACK6)
+add_logo_watermark(s5)
 add_gradient_overlay(s5)
 side_bar(s5)
 
@@ -453,7 +475,7 @@ for num, label, accent in stats:
     add_line_shape(s5, xs + 0.5, 4.2, 2.9, accent, 0.03)
 
     # Label
-    add_text(s5, xs + 0.3, 4.4, 3.3, 0.8, label, size=18, color=WHITE,
+    add_text(s5, xs + 0.3, 4.4, 3.3, 0.8, label, size=22, color=WHITE,
              bold=True, align=PP_ALIGN.CENTER)
 
     # Decorative bottom dots
@@ -476,6 +498,7 @@ add_logo_small(s5)
 # ============================================================
 s6 = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(s6, BLACK6)
+add_logo_watermark(s6)
 
 # Gradient overlays
 add_rect(s6, 0, 0, 13.333, 3.0, BLUE655, alpha=10)
@@ -495,7 +518,7 @@ add_line_shape(s6, 3.0, 2.9, 7.3, BLUE2717)
 add_rect(s6, 5.2, 2.98, 2.9, 0.03, ACCENT_GOLD)
 
 # Title
-add_text(s6, 0.5, 3.1, 12.3, 1.2, "LOBOS DE MONTANA", size=56, color=WHITE,
+add_text(s6, 0.5, 3.1, 12.3, 1.2, "LOBOS DE MONTANA", size=68, color=WHITE,
          bold=True, align=PP_ALIGN.CENTER, font_name="Calibri Light")
 
 # Bottom accent line
@@ -531,6 +554,7 @@ footer_bar(s6)
 # ============================================================
 s7 = prs.slides.add_slide(prs.slide_layouts[6])
 add_bg(s7, BLACK6)
+add_logo_watermark(s7)
 add_gradient_overlay(s7)
 side_bar(s7)
 
@@ -583,7 +607,7 @@ for idx, name in enumerate(team):
              bold=True, align=PP_ALIGN.CENTER)
 
     # Name
-    add_text(s7, x + 1.2, y + 0.3, 2.4, 0.4, name, size=16, color=WHITE, bold=True)
+    add_text(s7, x + 1.2, y + 0.3, 2.4, 0.4, name, size=18, color=WHITE, bold=True)
 
     # Role placeholder line
     add_line_shape(s7, x + 1.2, y + 0.75, 2.0, accent, 0.02)
