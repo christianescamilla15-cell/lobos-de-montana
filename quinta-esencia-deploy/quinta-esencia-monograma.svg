@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <defs>
+    <linearGradient id="goldM" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37"/>
+      <stop offset="50%" style="stop-color:#C9A84C"/>
+      <stop offset="100%" style="stop-color:#B8952A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- === MONOGRAMA: 5E entrelazados === -->
+  <!-- Uso: Sello de marca, estampado, marca de agua, grabado -->
+
+  <g transform="translate(150, 150)">
+    <!-- Marco pentagonal exterior fino -->
+    <polygon points="0,-120 114.1,-37.1 70.5,97.1 -70.5,97.1 -114.1,-37.1"
+             fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+
+    <!-- Marco pentagonal interior -->
+    <polygon points="0,-100 95.1,-30.9 58.8,80.9 -58.8,80.9 -95.1,-30.9"
+             fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"/>
+
+    <!-- Monograma "5" grande -->
+    <text x="-12" y="22" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+          font-size="100" font-weight="700" fill="url(#goldM)" opacity="0.9">5</text>
+
+    <!-- Monograma "E" superpuesta -->
+    <text x="18" y="22" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+          font-size="80" font-weight="300" fill="#F0EDE5" opacity="0.6"
+          style="mix-blend-mode: screen">E</text>
+
+    <!-- Línea inferior -->
+    <line x1="-50" y1="52" x2="50" y2="52" stroke="#C9A84C" stroke-width="0.8"/>
+
+    <!-- Texto "QUINTA ESENCIA" micro -->
+    <text x="0" y="70" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+          font-size="9" fill="#9A9AAE" letter-spacing="5">QUINTA ESENCIA</text>
+  </g>
+</svg>

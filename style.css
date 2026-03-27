@@ -28,6 +28,11 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-color: var(--color-fondo);
     color: var(--color-texto);
+    cursor: default;
+}
+
+a, button, .btn {
+    cursor: pointer;
 }
 
 /* Offset para anchor links con navbar fixed */
@@ -59,17 +64,20 @@ body {
 /* --- Card de producto --- */
 
 .producto-card {
-    background: var(--color-card);
-    border: none;
+    background: rgba(30, 55, 101, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(169, 192, 222, 0.1);
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--sombra-card);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .producto-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 16px 48px rgba(169, 192, 222, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(169, 192, 222, 0.3);
 }
 
 .producto-card__imagen {
@@ -144,20 +152,37 @@ body {
 }
 
 .btn-comprar {
-    background: var(--color-acento);
-    color: var(--color-fondo);
-    border: 2px solid var(--color-acento);
+    background: linear-gradient(135deg, #1E3765, #A9C0DE);
+    color: #fff;
+    border: none;
     border-radius: 8px;
     font-family: 'Montserrat', sans-serif;
     font-size: 0.78rem;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-comprar::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -75%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.6s ease;
+}
+
+.btn-comprar:hover::after {
+    left: 125%;
 }
 
 .btn-comprar:hover {
-    background: var(--color-acento-hover);
-    border-color: var(--color-acento-hover);
-    color: var(--color-fondo);
+    background: linear-gradient(135deg, #2a4a80, #D3DFE8);
+    color: #161F28;
     transform: scale(1.03);
 }
 
@@ -200,17 +225,20 @@ body {
 /* --- Card de catalogo --- */
 
 .catalogo-card {
-    background: var(--color-card);
-    border: none;
+    background: rgba(30, 55, 101, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(169, 192, 222, 0.1);
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--sombra-card);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .catalogo-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 36px rgba(169, 192, 222, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(169, 192, 222, 0.3);
 }
 
 .catalogo-card__imagen {
@@ -329,8 +357,8 @@ body {
 }
 
 .hero-slogan__cta {
-    background: var(--color-acento);
-    color: var(--color-fondo);
+    background: linear-gradient(135deg, #1E3765, #A9C0DE);
+    color: #fff;
     padding: 16px 40px;
     border-radius: 50px;
     font-family: 'Montserrat', sans-serif;
@@ -338,7 +366,8 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     box-shadow: 0 4px 20px rgba(169, 192, 222, 0.4);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: none;
 }
 
 .hero-slogan__cta:hover {
@@ -1151,4 +1180,280 @@ body {
     .hero-slogan__texto {
         font-size: 1.5rem;
     }
+}
+
+/* ============================================================
+   IMMERSIVE UPGRADES — Scroll gradient, vignette, loader pulse
+============================================================ */
+
+/* --- Scroll progress bar gradient --- */
+#scroll-progress,
+.lm-progress {
+    background: linear-gradient(90deg, #1E3765, #A9C0DE, #D3DFE8) !important;
+}
+
+/* --- Hero vignette effect --- */
+#slogan::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, #161F28 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* --- Loader pulse animation --- */
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.95); }
+}
+
+/* ============================================================
+   MASSIVE UPGRADE — Hero gradient, shipping banner, wishlist,
+   Instagram, back-to-top, size guide
+============================================================ */
+
+/* --- Hero Animated Gradient Background --- */
+#slogan {
+    background: linear-gradient(135deg, #0a0f14 0%, #161F28 25%, #1E3765 50%, #161F28 75%, #0a0f14 100%),
+                url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&fit=crop') center/cover no-repeat;
+    background-size: 400% 400%, cover;
+    animation: heroGradient 15s ease infinite;
+}
+@keyframes heroGradient {
+    0% { background-position: 0% 50%, center; }
+    50% { background-position: 100% 50%, center; }
+    100% { background-position: 0% 50%, center; }
+}
+
+/* --- Shipping Banner Slide Down --- */
+@keyframes slideDown {
+    to { transform: translateY(0); }
+}
+
+/* --- Wishlist Nav Icon --- */
+.navbar-inicio__wishlist {
+    position: relative;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+.navbar-inicio__wishlist:hover {
+    background: rgba(169, 192, 222, 0.1);
+}
+.navbar-inicio__wishlist-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #f43f5e;
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Wishlist Heart on Product Cards --- */
+.wishlist-heart {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 3;
+    background: rgba(22, 31, 40, 0.7);
+    border: none;
+    color: #A9C0DE;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+.wishlist-heart:hover {
+    background: rgba(244, 63, 94, 0.2);
+    color: #f43f5e;
+    transform: scale(1.15);
+}
+.wishlist-heart.active {
+    color: #f43f5e;
+    background: rgba(244, 63, 94, 0.2);
+}
+
+/* --- Instagram Grid Hover --- */
+.ig-grid-item:hover .ig-overlay {
+    opacity: 1 !important;
+}
+.ig-grid-item {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.ig-grid-item:hover {
+    transform: scale(1.03);
+}
+
+/* --- Back to Top --- */
+#backToTop:hover {
+    background: rgba(30, 55, 101, 1);
+    color: #D3DFE8;
+    transform: translateY(-2px);
+}
+
+/* --- Size Guide Link in Quick View --- */
+.qv-size-guide-link {
+    color: var(--color-acento);
+    font-size: 0.8rem;
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0;
+    margin-top: -8px;
+    margin-bottom: 12px;
+    display: block;
+}
+.qv-size-guide-link:hover {
+    color: var(--color-acento-hover);
+}
+
+/* --- Quick View Modal --- */
+.qv-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(22, 31, 40, 0.85);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+.qv-overlay--visible {
+    opacity: 1;
+    visibility: visible;
+}
+.qv-modal {
+    background: var(--color-fondo);
+    border: 1px solid rgba(169, 192, 222, 0.15);
+    border-radius: var(--border-radius);
+    max-width: 600px;
+    width: 92%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+.qv-overlay--visible .qv-modal {
+    transform: scale(1) translateY(0);
+}
+.qv-modal__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(22, 31, 40, 0.8);
+    border: 1px solid rgba(169, 192, 222, 0.2);
+    color: var(--color-texto);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s ease;
+}
+.qv-modal__close:hover {
+    background: var(--color-card);
+}
+.qv-modal__img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+.qv-modal__body {
+    padding: 24px;
+}
+.qv-modal__name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-texto);
+    margin-bottom: 8px;
+}
+.qv-modal__price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-acento);
+    margin-bottom: 16px;
+}
+.qv-modal__desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-texto-secundario);
+    margin-bottom: 20px;
+}
+.qv-modal__controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.qv-modal__select {
+    background: var(--color-card);
+    border: 1px solid rgba(169, 192, 222, 0.2);
+    color: var(--color-texto);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+}
+.qv-modal__qty-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.qv-modal__qty-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid rgba(169, 192, 222, 0.2);
+    background: var(--color-card);
+    color: var(--color-texto);
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+.qv-modal__qty-btn:hover {
+    background: var(--color-acento);
+    color: var(--color-fondo);
+}
+.qv-modal__qty-num {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-texto);
+    min-width: 24px;
+    text-align: center;
+}
+@media (max-width: 576px) {
+    .qv-modal__img { height: 200px; }
+    .qv-modal__body { padding: 16px; }
+    .qv-modal__controls { flex-direction: column; align-items: stretch; }
 }

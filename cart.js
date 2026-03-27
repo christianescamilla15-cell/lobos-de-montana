@@ -58,20 +58,40 @@
         };
     }
 
+    // ─── Cart sound effect ─────────────────────────────────────
+    function playCartSound() {
+        try {
+            var ctx = new (window.AudioContext || window.webkitAudioContext)();
+            var osc = ctx.createOscillator();
+            var gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.frequency.setValueAtTime(800, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(1200, ctx.currentTime + 0.05);
+            osc.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.15);
+            gain.gain.setValueAtTime(0.15, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + 0.2);
+        } catch(e) {}
+    }
+
     // ─── Add item to cart ──────────────────────────────────────
-    function addToCart(product) {
+    function addToCart(product, qty) {
+        var quantity = qty || 1;
         var existing = cart.find(function (item) { return item.id === product.id; });
         if (existing) {
-            existing.qty += 1;
+            existing.qty += quantity;
         } else {
             cart.push({
                 id:     product.id,
                 nombre: product.nombre,
                 precio: product.precio,
                 img:    product.img,
-                qty:    1
+                qty:    quantity
             });
         }
+        playCartSound();
         saveCart();
         renderCart();
         updateBadge();
@@ -240,14 +260,38 @@
             showToast('Carrito vaciado');
         });
 
-        // Checkout placeholder
-        btnFinalizar.addEventListener('click', function () {
+        // Checkout — submit order to API
+        btnFinalizar.addEventListener('click', async function () {
             if (cart.length === 0) {
-                showToast('Tu carrito está vacío');
+                showToast('Tu carrito esta vacio');
                 return;
             }
-            showToast('Redirigiendo al checkout...');
-            // Future: redirect to checkout page
+            var cartItems = cart.map(function (item) {
+                return { id: item.id, name: item.nombre, price: item.precio, quantity: item.qty };
+            });
+            try {
+                var res = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        items: cartItems,
+                        customer: { name: 'Cliente Web', email: 'pedido@lobosdemontana.mx' },
+                        total: getTotal()
+                    })
+                });
+                if (res.ok) {
+                    showToast('Pedido recibido! Te contactaremos pronto.');
+                    cart = [];
+                    saveCart();
+                    renderCart();
+                    updateBadge();
+                    closeCart();
+                } else {
+                    showToast('Error procesando pedido. Intenta de nuevo.');
+                }
+            } catch (err) {
+                showToast('Error de conexion.');
+            }
         });
     }
 
@@ -287,6 +331,246 @@
             toast.classList.remove('carrito-toast--visible');
         }, 2500);
     }
+
+    // ─── Quick View Modal ──────────────────────────────────────
+    (function initQuickView() {
+        // Create overlay + modal
+        var qvOverlay = document.createElement('div');
+        qvOverlay.className = 'qv-overlay';
+        qvOverlay.id = 'qvOverlay';
+        qvOverlay.innerHTML =
+            '<div class="qv-modal" id="qvModal">' +
+                '<button class="qv-modal__close" id="qvClose" aria-label="Cerrar">&times;</button>' +
+                '<img class="qv-modal__img" id="qvImg" src="" alt="">' +
+                '<div class="qv-modal__body">' +
+                    '<h3 class="qv-modal__name" id="qvName"></h3>' +
+                    '<div class="qv-modal__price" id="qvPrice"></div>' +
+                    '<p class="qv-modal__desc" id="qvDesc"></p>' +
+                    '<div class="qv-modal__controls">' +
+                        '<select class="qv-modal__select" id="qvSize" data-i18n-aria="quickview.size">' +
+                            '<option value="S">S</option>' +
+                            '<option value="M" selected>M</option>' +
+                            '<option value="L">L</option>' +
+                            '<option value="XL">XL</option>' +
+                        '</select>' +
+                        '<div class="qv-modal__qty-wrap">' +
+                            '<button class="qv-modal__qty-btn" id="qvMinus">&minus;</button>' +
+                            '<span class="qv-modal__qty-num" id="qvQty">1</span>' +
+                            '<button class="qv-modal__qty-btn" id="qvPlus">+</button>' +
+                        '</div>' +
+                    '</div>' +
+                    '<button class="btn btn-comprar w-100 py-2" id="qvAddCart">' +
+                        '<i class="bi bi-cart-plus"></i> <span data-i18n="btn.addcart">Agregar al carrito</span>' +
+                    '</button>' +
+                '</div>' +
+            '</div>';
+        document.body.appendChild(qvOverlay);
+
+        var qvModal = document.getElementById('qvModal');
+        var qvClose = document.getElementById('qvClose');
+        var qvImg = document.getElementById('qvImg');
+        var qvName = document.getElementById('qvName');
+        var qvPrice = document.getElementById('qvPrice');
+        var qvDesc = document.getElementById('qvDesc');
+        var qvQtyEl = document.getElementById('qvQty');
+        var qvMinus = document.getElementById('qvMinus');
+        var qvPlus = document.getElementById('qvPlus');
+        var qvAddCart = document.getElementById('qvAddCart');
+
+        var qvQty = 1;
+        var qvProduct = null;
+
+        function openQuickView(card) {
+            var product = getProductFromCard(card);
+            qvProduct = product;
+            qvQty = 1;
+            qvQtyEl.textContent = '1';
+            qvImg.src = product.img;
+            qvImg.alt = product.nombre;
+            qvName.textContent = product.nombre;
+            qvPrice.textContent = formatPrice(product.precio);
+
+            // Try to get description from the card
+            var descEl = card.querySelector('.producto-card__descripcion');
+            if (descEl) {
+                qvDesc.textContent = descEl.textContent;
+                qvDesc.style.display = '';
+            } else {
+                qvDesc.textContent = '';
+                qvDesc.style.display = 'none';
+            }
+
+            qvOverlay.classList.add('qv-overlay--visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuickView() {
+            qvOverlay.classList.remove('qv-overlay--visible');
+            document.body.style.overflow = '';
+        }
+
+        // Click on product images opens quick view
+        document.addEventListener('click', function (e) {
+            var imgArea = e.target.closest('.producto-card__imagen, .catalogo-card__imagen');
+            if (!imgArea) return;
+            // Don't open if clicking a button inside
+            if (e.target.closest('.btn-carrito, .btn-comprar')) return;
+            var card = imgArea.closest('[data-id]');
+            if (card) {
+                e.preventDefault();
+                openQuickView(card);
+            }
+        });
+
+        // Close handlers
+        qvClose.addEventListener('click', closeQuickView);
+        qvOverlay.addEventListener('click', function (e) {
+            if (e.target === qvOverlay) closeQuickView();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && qvOverlay.classList.contains('qv-overlay--visible')) {
+                closeQuickView();
+            }
+        });
+
+        // Quantity controls
+        qvMinus.addEventListener('click', function () {
+            if (qvQty > 1) {
+                qvQty--;
+                qvQtyEl.textContent = qvQty;
+            }
+        });
+        qvPlus.addEventListener('click', function () {
+            qvQty++;
+            qvQtyEl.textContent = qvQty;
+        });
+
+        // Add to cart from modal
+        qvAddCart.addEventListener('click', function () {
+            if (qvProduct) {
+                addToCart(qvProduct, qvQty);
+                showToast(qvProduct.nombre + ' agregado al carrito');
+                closeQuickView();
+            }
+        });
+    })();
+
+    // ─── Wishlist System ───────────────────────────────────────
+    (function initWishlist() {
+        var WISHLIST_KEY = 'lobos_wishlist';
+
+        function loadWishlist() {
+            try {
+                var data = localStorage.getItem(WISHLIST_KEY);
+                return data ? JSON.parse(data) : [];
+            } catch (e) { return []; }
+        }
+
+        function saveWishlist(wl) {
+            localStorage.setItem(WISHLIST_KEY, JSON.stringify(wl));
+        }
+
+        var wishlist = loadWishlist();
+
+        function updateWishlistBadge() {
+            var badge = document.getElementById('wishlistBadge');
+            if (badge) badge.textContent = wishlist.length;
+        }
+
+        function isInWishlist(id) {
+            return wishlist.some(function (item) { return item.id === id; });
+        }
+
+        function toggleWishlist(product) {
+            if (isInWishlist(product.id)) {
+                wishlist = wishlist.filter(function (item) { return item.id !== product.id; });
+                showToast('Eliminado de favoritos');
+            } else {
+                wishlist.push(product);
+                showToast('Agregado a favoritos');
+            }
+            saveWishlist(wishlist);
+            updateWishlistBadge();
+            updateHearts();
+        }
+
+        function updateHearts() {
+            document.querySelectorAll('.wishlist-heart').forEach(function (btn) {
+                var id = btn.dataset.wishlistId;
+                if (isInWishlist(id)) {
+                    btn.classList.add('active');
+                    btn.innerHTML = '<i class="bi bi-heart-fill"></i>';
+                } else {
+                    btn.classList.remove('active');
+                    btn.innerHTML = '<i class="bi bi-heart"></i>';
+                }
+            });
+        }
+
+        // Add heart buttons to all product cards
+        document.querySelectorAll('.producto-card__imagen, .catalogo-card__imagen').forEach(function (imgDiv) {
+            var card = imgDiv.closest('[data-id]');
+            if (!card) return;
+            var btn = document.createElement('button');
+            btn.className = 'wishlist-heart';
+            btn.dataset.wishlistId = card.dataset.id;
+            btn.innerHTML = '<i class="bi bi-heart"></i>';
+            btn.setAttribute('aria-label', 'Agregar a favoritos');
+            imgDiv.style.position = 'relative';
+            imgDiv.appendChild(btn);
+        });
+
+        // Click handler for hearts
+        document.addEventListener('click', function (e) {
+            var heartBtn = e.target.closest('.wishlist-heart');
+            if (!heartBtn) return;
+            e.stopPropagation();
+            e.preventDefault();
+            var card = heartBtn.closest('[data-id]');
+            if (!card) return;
+            toggleWishlist(getProductFromCard(card));
+        });
+
+        // Navbar wishlist button
+        var navWishlistBtn = document.getElementById('navWishlistBtn');
+        if (navWishlistBtn) {
+            navWishlistBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (wishlist.length === 0) {
+                    showToast('Tu lista de favoritos esta vacia');
+                } else {
+                    showToast('Tienes ' + wishlist.length + ' favoritos');
+                }
+            });
+        }
+
+        updateWishlistBadge();
+        updateHearts();
+    })();
+
+    // ─── Size Guide Link in Quick View ───────────────────────
+    (function initSizeGuide() {
+        // Wait for quick view modal to be in DOM
+        var interval = setInterval(function () {
+            var qvControls = document.querySelector('.qv-modal__controls');
+            if (!qvControls) return;
+            clearInterval(interval);
+
+            // Add size guide link after controls
+            var link = document.createElement('button');
+            link.className = 'qv-size-guide-link';
+            link.setAttribute('data-i18n', 'sizeguide.link');
+            link.textContent = 'Guia de tallas';
+            link.addEventListener('click', function () {
+                var overlay = document.getElementById('sizeGuideOverlay');
+                if (overlay) {
+                    overlay.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+            qvControls.parentNode.insertBefore(link, qvControls.nextSibling);
+        }, 200);
+    })();
 
 })();
 

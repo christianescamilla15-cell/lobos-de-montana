@@ -96,6 +96,32 @@
     'badge.nuevo': { es: 'Nuevo', en: 'New' },
     'badge.popular': { es: 'Popular', en: 'Popular' },
     'badge.esencial': { es: 'Esencial', en: 'Essential' },
+
+    // Shipping banner
+    'banner.shipping': { es: 'Envio gratis en compras mayores a $999', en: 'Free shipping on orders over $999' },
+
+    // Countdown
+    'countdown.label': { es: 'Oferta termina en', en: 'Offer ends in' },
+
+    // Live visitors
+    'visitors.label': { es: 'personas viendo ahora', en: 'people viewing now' },
+
+    // Instagram
+    'instagram.title': { es: 'Siguenos en Instagram', en: 'Follow us on Instagram' },
+
+    // Size guide
+    'sizeguide.title': { es: 'Guia de Tallas', en: 'Size Guide' },
+    'sizeguide.footwear': { es: 'Calzado', en: 'Footwear' },
+    'sizeguide.size': { es: 'Talla', en: 'Size' },
+    'sizeguide.chest': { es: 'Pecho (cm)', en: 'Chest (cm)' },
+    'sizeguide.waist': { es: 'Cintura (cm)', en: 'Waist (cm)' },
+    'sizeguide.hip': { es: 'Cadera (cm)', en: 'Hip (cm)' },
+    'sizeguide.link': { es: 'Guia de tallas', en: 'Size guide' },
+
+    // Newsletter
+    'newsletter.title': { es: 'Unete a la manada', en: 'Join the pack' },
+    'newsletter.desc': { es: 'Recibe ofertas exclusivas', en: 'Get exclusive deals' },
+    'newsletter.btn': { es: 'Suscribirme', en: 'Subscribe' },
   };
 
   function getLang() {

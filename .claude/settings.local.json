@@ -5,7 +5,9 @@
       "Bash(py create_pptx.py)",
       "Bash(py /c/Users/Chris/Documents/GitHub/wolves/create_pptx.py)",
       "Bash(py /c/Users/Chris/Documents/GitHub/wolves/convert_pdf.py)",
-      "Bash(py /c/Users/Chris/Documents/GitHub/wolves/create_pdf.py)"
+      "Bash(py /c/Users/Chris/Documents/GitHub/wolves/create_pdf.py)",
+      "Bash(sed 's/<[^>]*>//g')",
+      "Bash(done)"
     ]
   }
 }

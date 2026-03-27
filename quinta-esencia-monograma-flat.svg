@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <!-- === MONOGRAMA FLAT (sin gradientes) — para PDF/EPS === -->
+
+  <g transform="translate(150, 150)">
+    <polygon points="0,-120 114.1,-37.1 70.5,97.1 -70.5,97.1 -114.1,-37.1"
+             fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+    <polygon points="0,-100 95.1,-30.9 58.8,80.9 -58.8,80.9 -95.1,-30.9"
+             fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.4"/>
+    <text x="-12" y="22" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+          font-size="100" font-weight="700" fill="#C9A84C" opacity="0.9">5</text>
+    <text x="18" y="22" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+          font-size="80" font-weight="300" fill="#F0EDE5" opacity="0.6">E</text>
+    <line x1="-50" y1="52" x2="50" y2="52" stroke="#C9A84C" stroke-width="0.8"/>
+    <text x="0" y="70" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+          font-size="9" fill="#9A9AAE" letter-spacing="5">QUINTA ESENCIA</text>
+  </g>
+</svg>

@@ -190,25 +190,6 @@
         transition: color .2s;
       }
       .cb-header-close:hover { color: var(--cb-acento-hover); }
-      .cb-voice-btn {
-        background: none;
-        border: 1px solid var(--cb-acento);
-        color: var(--cb-acento);
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        transition: background .2s, color .2s;
-        flex-shrink: 0;
-      }
-      .cb-voice-btn:hover, .cb-voice-btn.active {
-        background: var(--cb-acento);
-        color: var(--cb-fondo);
-      }
 
       /* Mensajes */
       .cb-messages {
@@ -395,9 +376,6 @@
           <p class="cb-header-title">Lobos de Montaña</p>
           <p class="cb-header-sub">Asistente virtual • En línea</p>
         </div>
-        <button class="cb-voice-btn" id="cb-voice" aria-label="Activar voz" title="Voz">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5zm6 6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
-        </button>
         <button class="cb-header-close" id="cb-close" aria-label="Cerrar chat">&times;</button>
       </div>
       <div class="cb-messages" id="cb-messages">
@@ -662,7 +640,7 @@
     /* Contacto */
     if (matchAny(n, ['contacto', 'contactar', 'telefono', 'correo', 'email', 'mail', 'llamar', 'whatsapp', 'numero'])) {
       return {
-        text: '📞 ¡Con gusto te atendemos!\n\n📧 Email: wolves@tienda.com\n📱 Teléfono: +52 55 1234 5678\n\nTambién puedes dejarnos un mensaje en nuestra sección de contacto.',
+        text: '📞 ¡Con gusto te atendemos!\n\n📧 Email: contacto@lobosdemontana.mx\n📱 Teléfono: +52 55 1234 5678\n\nTambién puedes dejarnos un mensaje en nuestra sección de contacto.',
         quick: [
           { label: '📋 Ir a Contacto', value: 'ir contacto' },
           { label: '🔙 Menú principal', value: 'menu' },
@@ -769,12 +747,9 @@
     var sendBtn = $('cb-send');
     var input = $('cb-input');
 
-    var voiceBtn = $('cb-voice');
-
     /* Eventos */
     btn.addEventListener('click', toggleChat);
     closeBtn.addEventListener('click', closeChat);
-    if (voiceBtn) voiceBtn.addEventListener('click', toggleVoice);
 
     sendBtn.addEventListener('click', function () {
       var val = input.value;
@@ -810,46 +785,6 @@
           1000
         );
       }, 1500);
-    }
-  }
-
-  /* -----------------------------------------------------------------------
-     ELEVENLABS VOICE WIDGET
-  ------------------------------------------------------------------------ */
-  var elevenLabsLoaded = false;
-  var elevenLabsWidget = null;
-
-  function loadElevenLabs() {
-    if (elevenLabsLoaded) return;
-    elevenLabsLoaded = true;
-
-    var script = document.createElement('script');
-    script.src = 'https://elevenlabs.io/convai-widget/index.js';
-    script.async = true;
-    script.onload = function () {
-      // Create the widget element
-      var widget = document.createElement('elevenlabs-convai');
-      widget.setAttribute('agent-id', 'agent_5601kmfx9vnzeb691cj64x2khmm0');
-      widget.style.position = 'fixed';
-      widget.style.bottom = '96px';
-      widget.style.right = '96px';
-      widget.style.zIndex = '99997';
-      document.body.appendChild(widget);
-      elevenLabsWidget = widget;
-    };
-    document.head.appendChild(script);
-  }
-
-  function toggleVoice() {
-    var voiceBtn = $('cb-voice');
-    if (!elevenLabsLoaded) {
-      loadElevenLabs();
-      if (voiceBtn) voiceBtn.classList.add('active');
-    } else if (elevenLabsWidget) {
-      // Toggle visibility
-      var isVisible = elevenLabsWidget.style.display !== 'none';
-      elevenLabsWidget.style.display = isVisible ? 'none' : '';
-      if (voiceBtn) voiceBtn.classList.toggle('active', !isVisible);
     }
   }
 

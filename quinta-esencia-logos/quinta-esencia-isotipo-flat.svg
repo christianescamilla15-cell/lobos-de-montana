@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <!-- === ISOTIPO FLAT (sin gradientes) — para PDF/EPS === -->
+
+  <g transform="translate(150, 150)">
+    <circle cx="0" cy="0" r="130" fill="none" stroke="#C9A84C" stroke-width="0.5" opacity="0.3"/>
+    <polygon points="0,-110 104.6,-34 64.7,89 -64.7,89 -104.6,-34"
+             fill="#C9A84C" stroke="none"/>
+    <polygon points="0,-85 80.8,-26.2 49.9,68.7 -49.9,68.7 -80.8,-26.2"
+             fill="#0D0D0D" stroke="none"/>
+    <polygon points="0,-60 14,-18.5 57.1,-18.5 22.6,7.1 35.3,48.5 0,23 -35.3,48.5 -22.6,7.1 -57.1,-18.5 -14,-18.5"
+             fill="#6C3FA0" stroke="#C9A84C" stroke-width="0.8" opacity="0.7"/>
+    <text x="0" y="20" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif"
+          font-size="72" font-weight="700" fill="#C9A84C" letter-spacing="-2">5</text>
+    <circle cx="0" cy="-110" r="4" fill="#D4AF37"/>
+    <circle cx="104.6" cy="-34" r="4" fill="#D4AF37"/>
+    <circle cx="64.7" cy="89" r="4" fill="#D4AF37"/>
+    <circle cx="-64.7" cy="89" r="4" fill="#D4AF37"/>
+    <circle cx="-104.6" cy="-34" r="4" fill="#D4AF37"/>
+  </g>
+</svg>

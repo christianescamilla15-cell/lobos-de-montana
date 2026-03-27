@@ -1,0 +1,9 @@
+{
+  "name": "Lobos de Montaña",
+  "short_name": "Lobos",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#161F28",
+  "theme_color": "#1E3765",
+  "icons": [{ "src": "logo-wolf.png", "sizes": "192x192", "type": "image/png" }]
+}

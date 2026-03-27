@@ -137,21 +137,43 @@
   document.head.appendChild(styleEl);
 
   // ════════════════════════════════════════════════════════════════════
-  // 5. LOADING OVERLAY
+  // 5. LOADING OVERLAY (branded with progress bar)
   // ════════════════════════════════════════════════════════════════════
-  const loader = document.createElement('div');
-  loader.className = 'lm-loader';
-  loader.innerHTML = '<div class="lm-loader__spinner"></div>';
-  document.body.prepend(loader);
+  // Check if the branded loader exists in HTML first
+  const brandedLoader = document.getElementById('lm-loader');
+  const loaderBar = document.getElementById('lm-loader-bar');
 
-  window.addEventListener('load', function () {
-    setTimeout(function () {
-      loader.classList.add('lm-loader--hidden');
-    }, 300);
-    setTimeout(function () {
-      if (loader.parentNode) loader.parentNode.removeChild(loader);
-    }, 1000);
-  });
+  if (brandedLoader && loaderBar) {
+    // Animate the branded loader bar
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 30 + 10;
+      if (progress >= 100) progress = 100;
+      loaderBar.style.width = progress + '%';
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          brandedLoader.style.opacity = '0';
+          setTimeout(() => brandedLoader.remove(), 600);
+        }, 400);
+      }
+    }, 200);
+  } else {
+    // Fallback: create simple spinner loader
+    const loader = document.createElement('div');
+    loader.className = 'lm-loader';
+    loader.innerHTML = '<div class="lm-loader__spinner"></div>';
+    document.body.prepend(loader);
+
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        loader.classList.add('lm-loader--hidden');
+      }, 300);
+      setTimeout(function () {
+        if (loader.parentNode) loader.parentNode.removeChild(loader);
+      }, 1000);
+    });
+  }
 
   // ════════════════════════════════════════════════════════════════════
   // 4-c. SCROLL PROGRESS BAR
@@ -453,5 +475,88 @@
         btn.style.transform = 'translate(0, 0)';
       });
     });
+    // ══════════════════════════════════════════════════════════════════
+    // LIVE VISITORS COUNTER
+    // ══════════════════════════════════════════════════════════════════
+    var visitorEl = document.getElementById('visitor-count');
+    if (visitorEl) {
+      var vCount = Math.floor(Math.random() * 80) + 180;
+      visitorEl.textContent = vCount;
+      setInterval(function () {
+        vCount += Math.floor(Math.random() * 7) - 3;
+        if (vCount < 150) vCount = 150 + Math.floor(Math.random() * 20);
+        if (vCount > 300) vCount = 300 - Math.floor(Math.random() * 20);
+        visitorEl.textContent = vCount;
+      }, 5000);
+    }
+
+    // ══════════════════════════════════════════════════════════════════
+    // COUNTDOWN TIMER (resets every 24h, stored in localStorage)
+    // ══════════════════════════════════════════════════════════════════
+    var countdownEl = document.getElementById('countdown-timer');
+    if (countdownEl) {
+      var CD_KEY = 'lobos_countdown_end';
+      var endTime = parseInt(localStorage.getItem(CD_KEY), 10);
+      var now = Date.now();
+      if (!endTime || endTime <= now) {
+        endTime = now + 24 * 60 * 60 * 1000;
+        localStorage.setItem(CD_KEY, endTime.toString());
+      }
+      function updateCountdown() {
+        var diff = endTime - Date.now();
+        if (diff <= 0) {
+          endTime = Date.now() + 24 * 60 * 60 * 1000;
+          localStorage.setItem(CD_KEY, endTime.toString());
+          diff = endTime - Date.now();
+        }
+        var h = Math.floor(diff / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        countdownEl.textContent =
+          (h < 10 ? '0' : '') + h + ':' +
+          (m < 10 ? '0' : '') + m + ':' +
+          (s < 10 ? '0' : '') + s;
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    // ══════════════════════════════════════════════════════════════════
+    // NEWSLETTER POPUP (30s delay, once per session)
+    // ══════════════════════════════════════════════════════════════════
+    if (!sessionStorage.getItem('lobos_newsletter_shown')) {
+      setTimeout(function () {
+        var popup = document.getElementById('newsletterPopup');
+        if (popup) {
+          popup.style.display = 'flex';
+          sessionStorage.setItem('lobos_newsletter_shown', '1');
+        }
+      }, 30000);
+    }
+
+    // ══════════════════════════════════════════════════════════════════
+    // BACK TO TOP BUTTON
+    // ══════════════════════════════════════════════════════════════════
+    var backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+      window.addEventListener('scroll', function () {
+        if ((window.scrollY || window.pageYOffset) > 500) {
+          backToTopBtn.style.display = 'flex';
+          backToTopBtn.style.opacity = '1';
+        } else {
+          backToTopBtn.style.opacity = '0';
+          setTimeout(function () {
+            if ((window.scrollY || window.pageYOffset) <= 500) {
+              backToTopBtn.style.display = 'none';
+            }
+          }, 300);
+        }
+      }, { passive: true });
+
+      backToTopBtn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
   }); // end onReady
 })();

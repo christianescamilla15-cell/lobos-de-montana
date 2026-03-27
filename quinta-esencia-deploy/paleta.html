@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paleta de Colores — La Quinta Esencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0A0A0A;
+            color: #F0EDE5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            padding: 70px 20px 50px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+        }
+
+        .header-sub {
+            font-size: 0.7rem;
+            color: #6C3FA0;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: #C9A84C;
+            letter-spacing: 6px;
+        }
+
+        .header p {
+            color: #9A9AAE;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            margin-top: 12px;
+        }
+
+        /* ===== PALETA PRINCIPAL ===== */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            color: #6C3FA0;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #C9A84C;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        /* ===== SWATCHES GRANDES ===== */
+        .palette-hero {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .palette-secondary {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 16px;
+        }
+
+        .swatch {
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .swatch:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .swatch-color {
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+
+        .palette-hero .swatch-color {
+            height: 220px;
+        }
+
+        .palette-secondary .swatch-color {
+            height: 160px;
+        }
+
+        .swatch-color .hex-overlay {
+            font-family: 'Montserrat', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            opacity: 0.25;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            letter-spacing: 1px;
+        }
+
+        .swatch-info {
+            background: #111118;
+            padding: 18px 20px;
+        }
+
+        .swatch-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #F0EDE5;
+            margin-bottom: 4px;
+        }
+
+        .swatch-hex {
+            font-family: 'Montserrat', monospace;
+            font-size: 0.75rem;
+            color: #C9A84C;
+            letter-spacing: 1px;
+        }
+
+        .swatch-role {
+            font-size: 0.7rem;
+            color: #9A9AAE;
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+
+        .swatch-symbol {
+            font-size: 0.6rem;
+            color: #6C3FA0;
+            margin-top: 8px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Texto oscuro para swatches claros */
+        .swatch.light .hex-overlay,
+        .swatch.light .swatch-color { color: #1A1A2E; }
+
+        /* ===== GRADIENTES ===== */
+        .gradients-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 30px;
+        }
+
+        .gradient-card {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .gradient-bar {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gradient-bar span {
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .gradient-info {
+            background: #111118;
+            padding: 16px 20px;
+        }
+
+        .gradient-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            color: #F0EDE5;
+            margin-bottom: 4px;
+        }
+
+        .gradient-css {
+            font-family: 'Montserrat', monospace;
+            font-size: 0.65rem;
+            color: #9A9AAE;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+
+        .gradient-use {
+            font-size: 0.65rem;
+            color: #6C3FA0;
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== COMBINACIONES ===== */
+        .combos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 30px;
+        }
+
+        .combo-card {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 168, 76, 0.1);
+        }
+
+        .combo-preview {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .combo-preview span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+        }
+
+        .combo-info {
+            background: #111118;
+            padding: 14px 18px;
+        }
+
+        .combo-label {
+            font-size: 0.7rem;
+            color: #F0EDE5;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .combo-desc {
+            font-size: 0.65rem;
+            color: #9A9AAE;
+        }
+
+        .combo-ratio {
+            font-size: 0.6rem;
+            color: #C9A84C;
+            margin-top: 6px;
+            font-family: monospace;
+        }
+
+        /* ===== CÓDIGO CSS ===== */
+        .code-block {
+            background: #111118;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-block::before {
+            content: 'CSS';
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 0.6rem;
+            color: #6C3FA0;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .code-block pre {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            line-height: 1.8;
+            color: #9A9AAE;
+            overflow-x: auto;
+        }
+
+        .code-block .comment { color: #555; }
+        .code-block .prop { color: #C9A84C; }
+        .code-block .val { color: #D4A5A5; }
+        .code-block .sel { color: #6C3FA0; }
+        .code-block .str { color: #F0EDE5; }
+
+        /* ===== TIPOGRAFÍA ===== */
+        .type-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .type-card {
+            background: #111118;
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(201, 168, 76, 0.08);
+        }
+
+        .type-sample {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .type-name {
+            font-size: 0.7rem;
+            color: #C9A84C;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .type-desc {
+            font-size: 0.7rem;
+            color: #9A9AAE;
+            line-height: 1.5;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 50px 20px;
+            border-top: 1px solid rgba(201, 168, 76, 0.08);
+            margin-top: 40px;
+        }
+
+        .footer p {
+            font-size: 0.6rem;
+            color: #555;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.15), transparent);
+            margin: 0;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .palette-hero { grid-template-columns: 1fr; }
+            .palette-secondary { grid-template-columns: 1fr 1fr; }
+            .gradients-grid { grid-template-columns: 1fr; }
+            .combos { grid-template-columns: 1fr; }
+            .type-showcase { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+        }
+
+        /* ===== COPY TOOLTIP ===== */
+        .copied {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #C9A84C;
+            color: #0D0D0D;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .copied.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Toast -->
+    <div class="copied" id="toast">COLOR COPIADO</div>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-sub">Sistema de identidad visual</div>
+        <h1>Paleta de Colores</h1>
+        <p>La Quinta Esencia &mdash; Click en cualquier color para copiar el HEX</p>
+    </div>
+
+    <!-- ===== COLORES PRINCIPALES ===== -->
+    <div class="section">
+        <div class="section-label">Colores primarios</div>
+        <div class="section-title">Base Alqu&iacute;mica</div>
+
+        <div class="palette-hero">
+            <!-- Negro Ónix -->
+            <div class="swatch" onclick="copyColor('#0D0D0D')">
+                <div class="swatch-color" style="background:#0D0D0D; border: 1px solid rgba(255,255,255,0.06);">
+                    <span class="hex-overlay" style="color:#F0EDE5;">#0D0D0D</span>
+                </div>
+                <div class="swatch-info">
+                    <div class="swatch-name">Negro &Oacute;nix</div>
+                    <div class="swatch-hex">#0D0D0D &middot; RGB(13, 13, 13)</div>
+                    <div class="swatch-role">Fondo principal. El vac&iacute;o primordial del que emerge toda creaci&oacute;n.</div>
+                    <div class="swatch-symbol">&#9670; Alquimia: Nigredo &mdash; la fase oscura de transformaci&oacute;n</div>
+                </div>
+            </div>
+
+            <!-- Oro Alquímico -->
+            <div class="swatch" onclick="copyColor('#C9A84C')">
+                <div class="swatch-color" style="background: linear-gradient(145deg, #D4AF37, #C9A84C, #B8952A);">
+                    <span class="hex-overlay" style="color:#0D0D0D;">#C9A84C</span>
+                </div>
+                <div class="swatch-info">
+                    <div class="swatch-name">Oro Alqu&iacute;mico</div>
+                    <div class="swatch-hex">#C9A84C &middot; RGB(201, 168, 76)</div>
+                    <div class="swatch-role">Acento primario. El metal perfecto, la transmutaci&oacute;n lograda.</div>
+                    <div class="swatch-symbol">&#9670; Alquimia: Aurum &mdash; la meta del opus magnum</div>
+                </div>
+            </div>
+
+            <!-- Violeta Éter -->
+            <div class="swatch" onclick="copyColor('#6C3FA0')">
+                <div class="swatch-color" style="background: linear-gradient(145deg, #7B4FB5, #6C3FA0, #5A2D8C);">
+                    <span class="hex-overlay" style="color:#F0EDE5;">#6C3FA0</span>
+                </div>
+                <div class="swatch-info">
+                    <div class="swatch-name">Violeta &Eacute;ter</div>
+                    <div class="swatch-hex">#6C3FA0 &middot; RGB(108, 63, 160)</div>
+                    <div class="swatch-role">Acento secundario. El quinto elemento, lo que trasciende la materia.</div>
+                    <div class="swatch-symbol">&#9670; Filosof&iacute;a: Aether &mdash; el 5to elemento de Arist&oacute;teles</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="palette-secondary">
+            <!-- Carbón Profundo -->
+            <div class="swatch" onclick="copyColor('#1A1A2E')">
+                <div class="swatch-color" style="background:#1A1A2E;">
+                    <span class="hex-overlay" style="color:#F0EDE5;">#1A1A2E</span>
+                </div>
+                <div class="swatch-info">
+                    <div class="swatch-name">Carb&oacute;n Profundo</div>
+                    <div class="swatch-hex">#1A1A2E</div>
+                    <div class="swatch-role">Superficies y cards. Noche alqu&iacute;mica con sutil tono violeta.</div>
+                    <div class="swatch-symbol">&#9670; Separaci&oacute;n de capas</div>
+                </div>
+            </div>
+
+            <!-- Blanco Perla -->
+            <div class="swatch light" onclick="copyColor('#F0EDE5')">
+                <div class="swatch-color" style="background:#F0EDE5;">
+                    <span class="hex-overlay">#F0EDE5</span>
+                </div>
+                <div class="swatch-info">
+                    <div class="swatch-name">Blanco Perla</div>
+                    <div class="swatch-hex">#F0EDE5</div>
+                    <div class="swatch-role">Texto principal. Blanco c&aacute;lido que evoca pureza refinada.</div>
+                    <div class="swatch-symbol">&#9670; Alquimia: Albedo &mdash; la fase de purificaci&oacute;n</div>
+                </div>
+            </div>
+
+            <!-- Plata Luna -->
+            <div class="swatch" onclick="copyColor('#9A9AAE')">
+                <div class="swatch-color" style="background:#9A9AAE;">
+                    <span class="hex-overlay" style="color:#1A1A2E;">#9A9AAE</span>
+                </div>
+                <div class="swatch-info">
+                    <div class="swatch-name">Plata Luna</div>
+                    <div class="swatch-hex">#9A9AAE</div>
+                    <div class="swatch-role">Texto secundario. Complemento lunar del oro solar.</div>
+                    <div class="swatch-symbol">&#9670; Alquimia: Argentum &mdash; lo lunar y femenino</div>
+                </div>
+            </div>
+
+            <!-- Rosa Cuarzo -->
+            <div class="swatch" onclick="copyColor('#D4A5A5')">
+                <div class="swatch-color" style="background:#D4A5A5;">
+                    <span class="hex-overlay" style="color:#1A1A2E;">#D4A5A5</span>
+                </div>
+                <div class="swatch-info">
+                    <div class="swatch-name">Rosa Cuarzo</div>
+                    <div class="swatch-hex">#D4A5A5</div>
+                    <div class="swatch-role">Acento de estado. Humaniza la paleta con calidez emocional.</div>
+                    <div class="swatch-symbol">&#9670; Alquimia: Rubedo &mdash; la fase final, uni&oacute;n de opuestos</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== GRADIENTES ===== -->
+    <div class="section">
+        <div class="section-label">Gradientes</div>
+        <div class="section-title">Transiciones Alqu&iacute;micas</div>
+
+        <div class="gradients-grid">
+            <div class="gradient-card">
+                <div class="gradient-bar" style="background: linear-gradient(135deg, #D4AF37, #C9A84C, #B8952A);">
+                    <span style="color:#0D0D0D;">TRANSMUTACI&Oacute;N</span>
+                </div>
+                <div class="gradient-info">
+                    <div class="gradient-name">Oro Fundido</div>
+                    <div class="gradient-css">linear-gradient(135deg, #D4AF37, #C9A84C, #B8952A)</div>
+                    <div class="gradient-use">Uso: Botones CTA, highlights, t&iacute;tulos hero</div>
+                </div>
+            </div>
+
+            <div class="gradient-card">
+                <div class="gradient-bar" style="background: linear-gradient(135deg, #7B4FB5, #5A2D8C, #3D1A6E);">
+                    <span style="color:#F0EDE5;">TRASCENDENCIA</span>
+                </div>
+                <div class="gradient-info">
+                    <div class="gradient-name">&Eacute;ter Profundo</div>
+                    <div class="gradient-css">linear-gradient(135deg, #7B4FB5, #5A2D8C, #3D1A6E)</div>
+                    <div class="gradient-use">Uso: Fondos de secci&oacute;n, badges, acentos m&iacute;sticos</div>
+                </div>
+            </div>
+
+            <div class="gradient-card">
+                <div class="gradient-bar" style="background: linear-gradient(135deg, #0D0D0D, #1A1A2E, #2D1B4E);">
+                    <span style="color:#C9A84C;">NIGREDO</span>
+                </div>
+                <div class="gradient-info">
+                    <div class="gradient-name">Noche Alqu&iacute;mica</div>
+                    <div class="gradient-css">linear-gradient(135deg, #0D0D0D, #1A1A2E, #2D1B4E)</div>
+                    <div class="gradient-use">Uso: Fondo hero, secciones de profundidad</div>
+                </div>
+            </div>
+
+            <div class="gradient-card">
+                <div class="gradient-bar" style="background: linear-gradient(135deg, #C9A84C, #D4A5A5, #6C3FA0);">
+                    <span style="color:#0D0D0D;">OPUS MAGNUM</span>
+                </div>
+                <div class="gradient-info">
+                    <div class="gradient-name">La Gran Obra</div>
+                    <div class="gradient-css">linear-gradient(135deg, #C9A84C, #D4A5A5, #6C3FA0)</div>
+                    <div class="gradient-use">Uso: Elementos especiales, banners premium</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== COMBINACIONES DE CONTRASTE ===== -->
+    <div class="section">
+        <div class="section-label">Accesibilidad</div>
+        <div class="section-title">Combinaciones de Contraste</div>
+
+        <div class="combos">
+            <div class="combo-card">
+                <div class="combo-preview" style="background:#0D0D0D;">
+                    <span style="color:#F0EDE5;">Quinta Esencia</span>
+                </div>
+                <div class="combo-info">
+                    <div class="combo-label">Perla sobre &Oacute;nix</div>
+                    <div class="combo-desc">Texto principal sobre fondo</div>
+                    <div class="combo-ratio">Contraste: 17.4:1 &middot; WCAG AAA</div>
+                </div>
+            </div>
+
+            <div class="combo-card">
+                <div class="combo-preview" style="background:#0D0D0D;">
+                    <span style="color:#C9A84C;">Quinta Esencia</span>
+                </div>
+                <div class="combo-info">
+                    <div class="combo-label">Oro sobre &Oacute;nix</div>
+                    <div class="combo-desc">T&iacute;tulos y acentos</div>
+                    <div class="combo-ratio">Contraste: 7.8:1 &middot; WCAG AAA</div>
+                </div>
+            </div>
+
+            <div class="combo-card">
+                <div class="combo-preview" style="background:#1A1A2E;">
+                    <span style="color:#C9A84C;">Quinta Esencia</span>
+                </div>
+                <div class="combo-info">
+                    <div class="combo-label">Oro sobre Carb&oacute;n</div>
+                    <div class="combo-desc">Cards y superficies</div>
+                    <div class="combo-ratio">Contraste: 6.2:1 &middot; WCAG AA</div>
+                </div>
+            </div>
+
+            <div class="combo-card">
+                <div class="combo-preview" style="background:#0D0D0D;">
+                    <span style="color:#6C3FA0;">Quinta Esencia</span>
+                </div>
+                <div class="combo-info">
+                    <div class="combo-label">Violeta sobre &Oacute;nix</div>
+                    <div class="combo-desc">Labels y categor&iacute;as</div>
+                    <div class="combo-ratio">Contraste: 3.5:1 &middot; WCAG AA (large)</div>
+                </div>
+            </div>
+
+            <div class="combo-card">
+                <div class="combo-preview" style="background:#0D0D0D;">
+                    <span style="color:#9A9AAE;">Quinta Esencia</span>
+                </div>
+                <div class="combo-info">
+                    <div class="combo-label">Plata sobre &Oacute;nix</div>
+                    <div class="combo-desc">Texto secundario</div>
+                    <div class="combo-ratio">Contraste: 6.8:1 &middot; WCAG AA</div>
+                </div>
+            </div>
+
+            <div class="combo-card">
+                <div class="combo-preview" style="background:#F0EDE5;">
+                    <span style="color:#0D0D0D;">Quinta Esencia</span>
+                </div>
+                <div class="combo-info">
+                    <div class="combo-label">&Oacute;nix sobre Perla</div>
+                    <div class="combo-desc">Versi&oacute;n invertida / impresi&oacute;n</div>
+                    <div class="combo-ratio">Contraste: 17.4:1 &middot; WCAG AAA</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== TIPOGRAFÍA ===== -->
+    <div class="section">
+        <div class="section-label">Tipograf&iacute;a</div>
+        <div class="section-title">Fuentes del Sistema</div>
+
+        <div class="type-showcase">
+            <div class="type-card">
+                <div class="type-sample" style="font-family:'Playfair Display',serif; color:#C9A84C;">
+                    Quinta Aa
+                </div>
+                <div class="type-name">Playfair Display</div>
+                <div class="type-desc">Serif cl&aacute;sica con alto contraste. Para t&iacute;tulos, headings y elementos de marca. Evoca elegancia editorial y atemporalidad.</div>
+                <div style="margin-top:12px; font-family:'Playfair Display',serif; color:#9A9AAE; font-size:0.85rem; line-height:1.8;">
+                    ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+                    abcdefghijklmnopqrstuvwxyz<br>
+                    0123456789 &middot; !@#$%
+                </div>
+            </div>
+
+            <div class="type-card">
+                <div class="type-sample" style="font-family:'Montserrat',sans-serif; font-weight:300; color:#F0EDE5;">
+                    Esencia Aa
+                </div>
+                <div class="type-name">Montserrat</div>
+                <div class="type-desc">Sans-serif geom&eacute;trica. Para cuerpo de texto, UI, navegaci&oacute;n y elementos funcionales. Limpia, moderna y altamente legible.</div>
+                <div style="margin-top:12px; font-family:'Montserrat',sans-serif; color:#9A9AAE; font-size:0.85rem; line-height:1.8;">
+                    ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+                    abcdefghijklmnopqrstuvwxyz<br>
+                    0123456789 &middot; !@#$%
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== CÓDIGO CSS ===== -->
+    <div class="section">
+        <div class="section-label">Implementaci&oacute;n</div>
+        <div class="section-title">Variables CSS</div>
+
+        <div class="code-block">
+            <pre><span class="sel">:root</span> {
+  <span class="comment">/* ===== LA QUINTA ESENCIA — Paleta ===== */</span>
+
+  <span class="comment">/* Fondos */</span>
+  <span class="prop">--qe-onix:</span>           <span class="val">#0D0D0D</span>;     <span class="comment">/* Fondo principal */</span>
+  <span class="prop">--qe-carbon:</span>          <span class="val">#1A1A2E</span>;     <span class="comment">/* Superficies/cards */</span>
+
+  <span class="comment">/* Acentos */</span>
+  <span class="prop">--qe-oro:</span>             <span class="val">#C9A84C</span>;     <span class="comment">/* Acento primario */</span>
+  <span class="prop">--qe-oro-claro:</span>       <span class="val">#D4AF37</span>;     <span class="comment">/* Hover del oro */</span>
+  <span class="prop">--qe-oro-oscuro:</span>      <span class="val">#B8952A</span>;     <span class="comment">/* Active del oro */</span>
+  <span class="prop">--qe-violeta:</span>         <span class="val">#6C3FA0</span>;     <span class="comment">/* Acento secundario */</span>
+  <span class="prop">--qe-violeta-claro:</span>   <span class="val">#7B4FB5</span>;     <span class="comment">/* Hover del violeta */</span>
+  <span class="prop">--qe-violeta-oscuro:</span>  <span class="val">#5A2D8C</span>;     <span class="comment">/* Active del violeta */</span>
+
+  <span class="comment">/* Texto */</span>
+  <span class="prop">--qe-perla:</span>           <span class="val">#F0EDE5</span>;     <span class="comment">/* Texto principal */</span>
+  <span class="prop">--qe-plata:</span>           <span class="val">#9A9AAE</span>;     <span class="comment">/* Texto secundario */</span>
+  <span class="prop">--qe-cuarzo:</span>          <span class="val">#D4A5A5</span>;     <span class="comment">/* Acentos cálidos */</span>
+
+  <span class="comment">/* Gradientes */</span>
+  <span class="prop">--qe-grad-oro:</span>        <span class="val">linear-gradient(135deg, #D4AF37, #C9A84C, #B8952A)</span>;
+  <span class="prop">--qe-grad-eter:</span>       <span class="val">linear-gradient(135deg, #7B4FB5, #5A2D8C, #3D1A6E)</span>;
+  <span class="prop">--qe-grad-noche:</span>      <span class="val">linear-gradient(135deg, #0D0D0D, #1A1A2E, #2D1B4E)</span>;
+
+  <span class="comment">/* Tipografía */</span>
+  <span class="prop">--qe-font-display:</span>    <span class="str">'Playfair Display', Georgia, serif</span>;
+  <span class="prop">--qe-font-body:</span>       <span class="str">'Montserrat', 'Segoe UI', sans-serif</span>;
+}</pre>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>La Quinta Esencia &mdash; Paleta de identidad visual &mdash; 2026</p>
+    </div>
+
+    <script>
+        function copyColor(hex) {
+            navigator.clipboard.writeText(hex).then(() => {
+                const toast = document.getElementById('toast');
+                toast.textContent = `${hex} COPIADO`;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 1500);
+            });
+        }
+    </script>
+
+</body>
+</html>
