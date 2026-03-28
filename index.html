@@ -742,5 +742,72 @@
       }, 7000);
     });
     </script>
+
+    <!-- Onboarding Tour -->
+    <script>
+    // Onboarding Tour for Lobos de Montana
+    (function() {
+      const steps = [
+        { title: '\uD83D\uDC3A Bienvenido a Lobos de Monta\u00F1a', desc: 'Equipo premium para tus aventuras outdoor. Explora nuestro cat\u00E1logo de botas, mochilas, chaquetas y m\u00E1s.', target: null },
+        { title: '\u2B50 Productos Destacados', desc: '3 productos seleccionados con las mejores rese\u00F1as y precios especiales.', target: '#productos-destacados' },
+        { title: '\uD83D\uDCE6 Cat\u00E1logo Completo', desc: '9 productos de equipamiento outdoor. Haz click en cualquiera para ver detalles.', target: '#catalogo' },
+        { title: '\uD83D\uDED2 Carrito de Compras', desc: 'Agrega productos, ajusta cantidades y finaliza tu pedido con env\u00EDo a domicilio.', target: '.cart-icon' },
+        { title: '\uD83D\uDCAC Asistente Virtual', desc: 'Pregunta sobre productos, tallas, env\u00EDos o cualquier duda. Nuestro chatbot te ayuda al instante.', target: '.chatbot-fab' },
+        { title: '\uD83C\uDF10 Idioma', desc: 'Cambia entre Espa\u00F1ol e Ingl\u00E9s en cualquier momento.', target: '.lang-toggle' },
+        { title: '\uD83C\uDFD4\uFE0F \u00A1Explora!', desc: 'Navega por nuestro cat\u00E1logo y encuentra el equipo perfecto para tu pr\u00F3xima aventura.', target: null },
+      ];
+
+      let current = 0;
+
+      function createOverlay() {
+        const overlay = document.createElement('div');
+        overlay.id = 'tour-overlay';
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:10000;display:flex;align-items:center;justify-content:center;';
+
+        const panel = document.createElement('div');
+        panel.id = 'tour-panel';
+        panel.style.cssText = 'background:#1E3765;border:1px solid rgba(169,192,222,0.3);border-radius:16px;padding:32px;max-width:420px;width:90%;color:#D3DFE8;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.5);';
+
+        overlay.appendChild(panel);
+        document.body.appendChild(overlay);
+        return { overlay, panel };
+      }
+
+      function render() {
+        let overlay = document.getElementById('tour-overlay');
+        let panel = document.getElementById('tour-panel');
+        if (!overlay) {
+          const els = createOverlay();
+          overlay = els.overlay;
+          panel = els.panel;
+        }
+
+        const step = steps[current];
+        const isLast = current === steps.length - 1;
+        const counter = '<div style="color:rgba(169,192,222,0.5);font-size:12px;margin-bottom:12px">' + (current + 1) + ' / ' + steps.length + '</div>';
+        const title = '<h3 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 12px">' + step.title + '</h3>';
+        const desc = '<p style="font-size:15px;line-height:1.6;color:rgba(211,223,232,0.8);margin:0 0 24px">' + step.desc + '</p>';
+        const dots = steps.map(function(_, i) { return '<span style="display:inline-block;width:' + (i===current?10:6) + 'px;height:' + (i===current?10:6) + 'px;border-radius:50%;background:' + (i===current?'#A9C0DE':'rgba(169,192,222,0.3)') + ';margin:0 3px;transition:all 0.3s"></span>'; }).join('');
+        const btns = isLast
+          ? '<button onclick="document.getElementById(\'tour-overlay\').remove()" style="background:linear-gradient(135deg,#1E3765,#A9C0DE);color:#fff;border:none;padding:12px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer">\u00A1Explorar! \uD83C\uDFD4\uFE0F</button>'
+          : '<button onclick="window.__tourSkip()" style="background:transparent;color:rgba(169,192,222,0.5);border:1px solid rgba(169,192,222,0.2);padding:10px 20px;border-radius:8px;font-size:14px;cursor:pointer;margin-right:12px">Saltar</button><button onclick="window.__tourNext()" style="background:linear-gradient(135deg,#1E3765,#A9C0DE);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">Siguiente \u2192</button>';
+
+        panel.innerHTML = counter + title + desc + '<div style="margin-bottom:20px">' + dots + '</div>' + btns;
+
+        if (step.target) {
+          const el = document.querySelector(step.target);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+
+      window.__tourNext = function() { if (current < steps.length - 1) { current++; render(); } };
+      window.__tourSkip = function() { document.getElementById('tour-overlay')?.remove(); };
+
+      // Start tour on load
+      window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(render, 1500);
+      });
+    })();
+    </script>
 </body>
 </html>
