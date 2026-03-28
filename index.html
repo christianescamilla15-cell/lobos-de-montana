@@ -743,69 +743,143 @@
     });
     </script>
 
-    <!-- Onboarding Tour -->
+    <!-- Level 3 Interactive Tour — Spotlight + Real Actions -->
     <script>
-    // Onboarding Tour for Lobos de Montana
     (function() {
-      const steps = [
-        { title: '\uD83D\uDC3A Bienvenido a Lobos de Monta\u00F1a', desc: 'Equipo premium para tus aventuras outdoor. Explora nuestro cat\u00E1logo de botas, mochilas, chaquetas y m\u00E1s.', target: null },
-        { title: '\u2B50 Productos Destacados', desc: '3 productos seleccionados con las mejores rese\u00F1as y precios especiales.', target: '#productos-destacados' },
-        { title: '\uD83D\uDCE6 Cat\u00E1logo Completo', desc: '9 productos de equipamiento outdoor. Haz click en cualquiera para ver detalles.', target: '#catalogo' },
-        { title: '\uD83D\uDED2 Carrito de Compras', desc: 'Agrega productos, ajusta cantidades y finaliza tu pedido con env\u00EDo a domicilio.', target: '.cart-icon' },
-        { title: '\uD83D\uDCAC Asistente Virtual', desc: 'Pregunta sobre productos, tallas, env\u00EDos o cualquier duda. Nuestro chatbot te ayuda al instante.', target: '.chatbot-fab' },
-        { title: '\uD83C\uDF10 Idioma', desc: 'Cambia entre Espa\u00F1ol e Ingl\u00E9s en cualquier momento.', target: '.lang-toggle' },
-        { title: '\uD83C\uDFD4\uFE0F \u00A1Explora!', desc: 'Navega por nuestro cat\u00E1logo y encuentra el equipo perfecto para tu pr\u00F3xima aventura.', target: null },
+      var lang = 'es';
+      var current = 0;
+      var overlay, panel;
+
+      var stepsES = [
+        { id:'welcome', title:'Bienvenido a Lobos de Montana', desc:'Equipo premium de senderismo y montana. Te mostramos las funciones principales.', target:null, action:null },
+        { id:'featured', title:'Productos Destacados', desc:'Mira nuestros 3 productos estrella. Haz clic en la imagen para ver detalles...', target:'#productos-destacados .row', action:function(){ scrollTo('#productos-destacados'); setTimeout(function(){ var img = document.querySelector('.producto-card__imagen'); if(img) img.click(); },900); } },
+        { id:'catalog', title:'Catalogo Completo', desc:'9 productos de equipamiento outdoor para cada aventura.', target:'#catalogo .row', action:function(){ closeQuickView(); scrollTo('#catalogo'); } },
+        { id:'cart', title:'Carrito de Compras', desc:'Agregamos un producto al carrito. Mira como se actualiza el icono.', target:'.navbar-inicio__carrito', action:function(){ var btn = document.querySelector('.producto-card .btn-carrito'); if(btn) btn.click(); } },
+        { id:'chatbot', title:'Asistente Virtual', desc:'Nuestro chatbot responde tus dudas al instante. Observa...', target:'#lobos-chat-window', action:function(){ var cb = document.getElementById('lobos-chat-btn'); if(cb) cb.click(); setTimeout(function(){ typeInto('#cb-input','Que productos tienen?'); setTimeout(function(){ clickEl('#cb-send'); },400); },600); } },
+        { id:'i18n', title:'Idioma ES / EN', desc:'Cambia el idioma de toda la pagina. Observa el cambio...', target:'#lang-toggle', action:function(){ if(window.i18n) window.i18n.setLang('en'); setTimeout(function(){ if(window.i18n) window.i18n.setLang('es'); },1800); } },
+        { id:'final', title:'Listo para explorar!', desc:'Ya conoces las funciones principales. Disfruta la experiencia.', target:null, action:function(){ window.scrollTo({top:0,behavior:'smooth'}); } }
       ];
 
-      let current = 0;
+      var stepsEN = [
+        { id:'welcome', title:'Welcome to Lobos de Montana', desc:'Premium hiking & mountain gear. Let us show you the main features.', target:null, action:null },
+        { id:'featured', title:'Featured Products', desc:'Our top 3 products. Click on the image to see details...', target:'#productos-destacados .row', action:stepsES[1].action },
+        { id:'catalog', title:'Full Catalog', desc:'9 outdoor gear products for every adventure.', target:'#catalogo .row', action:stepsES[2].action },
+        { id:'cart', title:'Shopping Cart', desc:'We add a product to cart. Watch the icon update.', target:'.navbar-inicio__carrito', action:stepsES[3].action },
+        { id:'chatbot', title:'Virtual Assistant', desc:'Our chatbot answers your questions instantly. Watch...', target:'#lobos-chat-window', action:function(){ var cb = document.getElementById('lobos-chat-btn'); if(cb) cb.click(); setTimeout(function(){ typeInto('#cb-input','What products do you have?'); setTimeout(function(){ clickEl('#cb-send'); },400); },600); } },
+        { id:'i18n', title:'Language ES / EN', desc:'Switch the entire page language. Watch the change...', target:'#lang-toggle', action:stepsES[5].action },
+        { id:'final', title:'Ready to explore!', desc:'You now know the main features. Enjoy the experience.', target:null, action:stepsES[6].action }
+      ];
 
-      function createOverlay() {
-        const overlay = document.createElement('div');
+      function steps() { return lang === 'en' ? stepsEN : stepsES; }
+
+      /* ---- Helpers ---- */
+      function scrollTo(sel) { var el = document.querySelector(sel); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); }
+      function clickEl(sel) { var el = document.querySelector(sel); if(el) el.click(); }
+      function typeInto(sel, text) {
+        var el = document.querySelector(sel);
+        if(!el) return;
+        el.value = '';
+        var i = 0;
+        var iv = setInterval(function(){
+          if(i < text.length){ el.value += text[i]; i++; el.dispatchEvent(new Event('input',{bubbles:true})); }
+          else clearInterval(iv);
+        }, 40);
+      }
+      function closeQuickView() {
+        var qv = document.getElementById('qvOverlay');
+        if(qv) qv.classList.remove('qv-overlay--visible');
+        document.body.style.overflow = '';
+      }
+
+      /* ---- Spotlight ---- */
+      function showSpotlight(sel) {
+        if(!sel) { overlay.style.clipPath = ''; return; }
+        var el = document.querySelector(sel);
+        if(!el) { overlay.style.clipPath = ''; return; }
+        var rect = el.getBoundingClientRect();
+        var pad = 12;
+        overlay.style.clipPath = 'polygon(' +
+          '0% 0%, 100% 0%, 100% 100%, 0% 100%, ' +
+          '0% ' + (rect.top - pad) + 'px, ' +
+          (rect.left - pad) + 'px ' + (rect.top - pad) + 'px, ' +
+          (rect.left - pad) + 'px ' + (rect.bottom + pad) + 'px, ' +
+          (rect.right + pad) + 'px ' + (rect.bottom + pad) + 'px, ' +
+          (rect.right + pad) + 'px ' + (rect.top - pad) + 'px, ' +
+          '0% ' + (rect.top - pad) + 'px)';
+      }
+
+      /* ---- Create DOM ---- */
+      function init() {
+        overlay = document.createElement('div');
         overlay.id = 'tour-overlay';
-        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:10000;display:flex;align-items:center;justify-content:center;';
-
-        const panel = document.createElement('div');
-        panel.id = 'tour-panel';
-        panel.style.cssText = 'background:#1E3765;border:1px solid rgba(169,192,222,0.3);border-radius:16px;padding:32px;max-width:420px;width:90%;color:#D3DFE8;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.5);';
-
-        overlay.appendChild(panel);
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(22,31,40,0.82);z-index:10000;transition:clip-path 0.4s ease;';
         document.body.appendChild(overlay);
-        return { overlay, panel };
+
+        panel = document.createElement('div');
+        panel.id = 'tour-panel';
+        panel.style.cssText = 'position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#1E3765;border:1px solid rgba(169,192,222,0.3);border-radius:16px;padding:28px 32px;max-width:440px;width:92%;color:#D3DFE8;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.5);z-index:10001;font-family:Montserrat,sans-serif;';
+        document.body.appendChild(panel);
       }
 
+      /* ---- Render ---- */
       function render() {
-        let overlay = document.getElementById('tour-overlay');
-        let panel = document.getElementById('tour-panel');
-        if (!overlay) {
-          const els = createOverlay();
-          overlay = els.overlay;
-          panel = els.panel;
+        var s = steps();
+        var step = s[current];
+        var isFirst = current === 0;
+        var isLast = current === s.length - 1;
+
+        // Spotlight
+        if(step.target) {
+          setTimeout(function(){ showSpotlight(step.target); }, 500);
+        } else {
+          overlay.style.clipPath = '';
         }
 
-        const step = steps[current];
-        const isLast = current === steps.length - 1;
-        const counter = '<div style="color:rgba(169,192,222,0.5);font-size:12px;margin-bottom:12px">' + (current + 1) + ' / ' + steps.length + '</div>';
-        const title = '<h3 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 12px">' + step.title + '</h3>';
-        const desc = '<p style="font-size:15px;line-height:1.6;color:rgba(211,223,232,0.8);margin:0 0 24px">' + step.desc + '</p>';
-        const dots = steps.map(function(_, i) { return '<span style="display:inline-block;width:' + (i===current?10:6) + 'px;height:' + (i===current?10:6) + 'px;border-radius:50%;background:' + (i===current?'#A9C0DE':'rgba(169,192,222,0.3)') + ';margin:0 3px;transition:all 0.3s"></span>'; }).join('');
-        const btns = isLast
-          ? '<button onclick="document.getElementById(\'tour-overlay\').remove()" style="background:linear-gradient(135deg,#1E3765,#A9C0DE);color:#fff;border:none;padding:12px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer">\u00A1Explorar! \uD83C\uDFD4\uFE0F</button>'
-          : '<button onclick="window.__tourSkip()" style="background:transparent;color:rgba(169,192,222,0.5);border:1px solid rgba(169,192,222,0.2);padding:10px 20px;border-radius:8px;font-size:14px;cursor:pointer;margin-right:12px">Saltar</button><button onclick="window.__tourNext()" style="background:linear-gradient(135deg,#1E3765,#A9C0DE);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">Siguiente \u2192</button>';
+        // Action
+        if(step.action) step.action();
 
-        panel.innerHTML = counter + title + desc + '<div style="margin-bottom:20px">' + dots + '</div>' + btns;
+        var counter = '<div style="color:rgba(169,192,222,0.5);font-size:11px;margin-bottom:8px">' + (current+1) + ' / ' + s.length + '</div>';
+        var title = '<h3 style="font-size:19px;font-weight:700;color:#fff;margin:0 0 8px">' + step.title + '</h3>';
+        var desc = '<p style="font-size:14px;line-height:1.5;color:rgba(211,223,232,0.8);margin:0 0 20px">' + step.desc + '</p>';
+        var dots = s.map(function(_,i){ return '<span style="display:inline-block;width:'+(i===current?10:6)+'px;height:'+(i===current?10:6)+'px;border-radius:50%;background:'+(i===current?'#A9C0DE':'rgba(169,192,222,0.3)')+';margin:0 3px;transition:all 0.3s"></span>'; }).join('');
 
-        if (step.target) {
-          const el = document.querySelector(step.target);
-          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        var btns = '';
+        if(isFirst) {
+          // Welcome: language toggle + Comenzar
+          btns = '<div style="margin-bottom:16px"><button onclick="window.__tourLang(\'es\')" style="padding:6px 16px;border-radius:6px;border:1px solid '+(lang==='es'?'#A9C0DE':'rgba(169,192,222,0.2)')+';background:'+(lang==='es'?'rgba(169,192,222,0.15)':'transparent')+';color:#D3DFE8;cursor:pointer;margin-right:8px;font-size:13px">ES</button><button onclick="window.__tourLang(\'en\')" style="padding:6px 16px;border-radius:6px;border:1px solid '+(lang==='en'?'#A9C0DE':'rgba(169,192,222,0.2)')+';background:'+(lang==='en'?'rgba(169,192,222,0.15)':'transparent')+';color:#D3DFE8;cursor:pointer;font-size:13px">EN</button></div>' +
+            '<button onclick="window.__tourNext()" style="background:linear-gradient(135deg,#1E3765,#A9C0DE);color:#fff;border:none;padding:12px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;width:100%">' + (lang==='en'?'Start Tour':'Comenzar Tour') + '</button>' +
+            '<button onclick="window.__tourSkip()" style="background:transparent;color:rgba(169,192,222,0.4);border:none;padding:8px;font-size:12px;cursor:pointer;margin-top:8px">' + (lang==='en'?'Skip':'Saltar') + '</button>';
+        } else if(isLast) {
+          btns = '<div style="display:flex;gap:12px;justify-content:center"><button onclick="window.__tourRestart()" style="background:transparent;color:#A9C0DE;border:1px solid rgba(169,192,222,0.3);padding:10px 24px;border-radius:8px;font-size:14px;cursor:pointer">' + (lang==='en'?'Restart Tour':'Reiniciar Tour') + '</button><button onclick="window.__tourEnd()" style="background:linear-gradient(135deg,#1E3765,#A9C0DE);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">' + (lang==='en'?'Explore':'Explorar') + '</button></div>';
+        } else {
+          btns = '<div style="display:flex;gap:12px;justify-content:center"><button onclick="window.__tourSkip()" style="background:transparent;color:rgba(169,192,222,0.5);border:1px solid rgba(169,192,222,0.2);padding:10px 20px;border-radius:8px;font-size:13px;cursor:pointer">' + (lang==='en'?'Skip':'Saltar') + '</button><button onclick="window.__tourNext()" style="background:linear-gradient(135deg,#1E3765,#A9C0DE);color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">' + (lang==='en'?'Next':'Siguiente') + ' &rarr;</button></div>';
+        }
+
+        panel.innerHTML = counter + title + desc + '<div style="margin-bottom:16px">' + dots + '</div>' + btns;
+      }
+
+      /* ---- Controls ---- */
+      window.__tourNext = function() { if(current < steps().length - 1){ current++; render(); } };
+      window.__tourSkip = function() { cleanup(); };
+      window.__tourEnd = function() { cleanup(); };
+      window.__tourRestart = function() { current = 0; render(); };
+      window.__tourLang = function(l) { lang = l; render(); };
+
+      function cleanup() {
+        if(overlay) overlay.remove();
+        if(panel) panel.remove();
+        closeQuickView();
+        // Close chatbot if open
+        var chatWin = document.getElementById('lobos-chat-window');
+        if(chatWin && chatWin.classList.contains('open')) {
+          var cb = document.getElementById('lobos-chat-btn');
+          if(cb) cb.click();
         }
       }
 
-      window.__tourNext = function() { if (current < steps.length - 1) { current++; render(); } };
-      window.__tourSkip = function() { document.getElementById('tour-overlay')?.remove(); };
-
-      // Start tour on load
+      /* ---- Start ---- */
       window.addEventListener('DOMContentLoaded', function() {
-        setTimeout(render, 1500);
+        setTimeout(function(){ init(); render(); }, 1800);
       });
     })();
     </script>
